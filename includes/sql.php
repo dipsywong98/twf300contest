@@ -34,25 +34,25 @@ class DB{
         }
     }
     
-    public function insert($table, $columns, $values){
-        if(count($columns)!=count($values)) return false;
-        $col = "(";
-        $val = "('";
-        for ($i=0;$i<count($columns);$i++){
-            if($i!=0){
-                $col .=",";
-                $val .="','";
-            }
-            $col .= $columns[$i];
-            $val .= $values[$i];
-        }
-        $col .= ")";
-        $val .= "')";
-        
-        $sql = "INSERT INTO `".$table."` ".$col." VALUES".$val;
-        
-        return $this->conn->query($sql);
-    }
+//    public function insert($table, $columns, $values){
+//        if(count($columns)!=count($values)) return false;
+//        $col = "(";
+//        $val = "('";
+//        for ($i=0;$i<count($columns);$i++){
+//            if($i!=0){
+//                $col .=",";
+//                $val .="','";
+//            }
+//            $col .= $columns[$i];
+//            $val .= $values[$i];
+//        }
+//        $col .= ")";
+//        $val .= "')";
+//        
+//        $sql = "INSERT INTO `".$table."` ".$col." VALUES".$val;
+//        
+//        return $this->conn->query($sql);
+//    }
     
     //update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
@@ -73,7 +73,7 @@ class DB{
     
     //update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
-    public function insert_new($table, $data){
+    public function insert($table, $data){
         $sql = "INSERT INTO `".$table."` (";
         
         $col = "";

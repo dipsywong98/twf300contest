@@ -65,7 +65,13 @@ function loginByGamelet($db, $username, $password){
             
             $hash = md5(uniqid(rand(), true));
             $ip = get_client_ip();
-            $db->insert("usr",array("username","hash","ip","type"),array($username,$hash,$ip,"gamelet"));
+//            $db->insert("usr",array("username","hash","ip","type"),array($username,$hash,$ip,"gamelet"));
+            $db->insert("usr",[
+                "username"=>$username,
+                "hash"=>$hash,
+                "ip"=>$ip,
+                "type"=>"gamelet"
+            ]);
             
             return true;
         }
