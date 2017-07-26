@@ -37,9 +37,17 @@ function loginByGamelet($db, $username, $password){
         $newUser = $db->numberOf("usr","username",$username);
         
         if($newUser > 0){
+            //not a new user
+            
+            $user =  $db->select("usr","username",$username);
+            echo $user["hash"];
+            
             return true;
         }
         else{
+            //this is new user
+            
+            
             $hash = md5(uniqid(rand(), true));
             $ip = get_client_ip();
             $db->insert("usr",array("username","hash","ip","type"),array($username,$hash,$ip,"gamelet"));

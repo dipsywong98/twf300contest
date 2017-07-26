@@ -10,14 +10,28 @@ class DB{
         $this->table = "contestant";
     }
     
+    //return amout of rows in table with column value as value
     public function numberOf($table, $column, $value){
-        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = '".$value."'";
-        $result = $this->conn->query($sql);
-        try{
-            return $result->num_rows;
-        }
-        catch(Exception $e){
+        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = :".$column."";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(array( $column => $value));
+        $result = $stmt->fetchAll();
+        return count($result);
+    }
+    
+    //return the hash of first row in table with column value as value
+    public function select($table, $column, $value){
+        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = :".$column."";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(array($column => $value));
+        $stmt = $stmt->fetchAll();
+        
+        if (count($stmt)==0){
+            echo("nothing");
             return 0;
+        }
+        foreach($stmt as $row){
+            return $row;
         }
     }
     
@@ -43,51 +57,23 @@ class DB{
         return $this->conn->query($sql);
     }
     
-    public function select($table, $index = -1, $param=""){
-        $rows = "";
+    //update row with corresponding has in table with data
+    //data is an array such that [key1 => value1, key2 =>value2, etc]
+    public function update($table, $hash, $data){
+        $sql = "UPDATE `".$table."` SET ";
         
-        if($param){
-            $sql = "SELECT * FROM `".$table."`";
-            $result = $this->conn->query($sql);
+        $i=0;
+        foreach($data as $key => $value){
+            if($i!=0) $sql .= " , "
+            $sql .= $key ." = :".$key;
         }
-        else{
-            $sql = "SELECT * FROM `".$table."` WHERE ".$param;
-            $result = $this->conn->query($sql);
-        }
+        $sql .= " WHERE `hash = :hash";
         
-        if($index == -1)
-            return $result;
-        else{
-            $i = 0;
-            while($row = $result->fetch_assoc()) {
-                if($i++==$index) return $row;
-            }
-        }
-        
-//        $rows = array();
-//        
-//        $sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='".$table."'";
-//        $column_rows = $this->conn->query($sql);
-//        $columns = array();
-//        while($row = $column_rows->fetch_assoc()) {
-//            array_push($columns,$row["COLUMN_NAME"]);
-//        }
-//
-//        for($i=0;$i<count($columns);$i++){
-//            echo $columns[$i].",";
-//        }
+        echo $sql;
     }
+    
 }
 
 $db = new DB($conn);
 
-$db->select("usr");
-
-/**
-* return number of row with column as this value in the table
-*/
-function numberOf($conn, $table, $column, $value){
-    $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = '".$value."'";
-    return $conn->query($sql)->num_rows;
-}
 ?>
