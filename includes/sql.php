@@ -27,7 +27,6 @@ class DB{
         $stmt = $stmt->fetchAll();
         
         if (count($stmt)==0){
-            echo("nothing");
             return 0;
         }
         foreach($stmt as $row){
@@ -52,23 +51,48 @@ class DB{
         
         $sql = "INSERT INTO `".$table."` ".$col." VALUES".$val;
         
-        echo "<br>".$sql."<br>";
-        
         return $this->conn->query($sql);
     }
     
-    //TODO: update row with corresponding has in table with data
+    //update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
     public function update($table, $hash, $data){
         $sql = "UPDATE `".$table."` SET ";
         
         $i=0;
         foreach($data as $key => $value){
-            if($i!=0) $sql .= " , ";
+            if($i++!=0) $sql .= " , ";
             $sql .= $key ." = :".$key;
         }
-        $sql .= " WHERE `hash = :hash";
+        $sql .= " WHERE `hash` = :hash";
+        $data["hash"] = $hash;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($data);
+//        echo $sql;
+    }
+    
+    //update row with corresponding has in table with data
+    //data is an array such that [key1 => value1, key2 =>value2, etc]
+    public function insert_new($table, $data){
+        $sql = "INSERT INTO `".$table."` (";
         
+        $col = "";
+        $val = "";
+        $i=0;
+        foreach($data as $key => $value){
+            if($i++!=0){
+                $col .=",";
+                $val .=",";
+            }
+            $col .= $key;
+            $val .= ":".$key;
+        }
+        $sql .= $col.") VALUE (".$val.")";
+        
+        echo $sql;
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($data);
         echo $sql;
     }
     

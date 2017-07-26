@@ -28,6 +28,7 @@ function alert($txt){
 /**
  * simple method to encrypt or decrypt a plain text string
  * initialization vector(IV) has to be the same when encrypting and decrypting
+ * copied from https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
  * 
  * @param string $action: can be 'encrypt' or 'decrypt'
  * @param string $string: string to encrypt or decrypt
@@ -56,7 +57,21 @@ function isLogin(){
     if(count($_COOKIE)==0) return 0;
 //    return $_COOKIE["login"]=="yes";
     if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return 0;
-    $username = encrypt_decrypt("decrypt",$_COOKIE["usr"],get_client_ip());
-    return encrypt_decrypt("decrypt", $_COOKIE["ehash"], $GLOBALS["db"]->select("usr","username",$username)["hash"]) == get_client_ip();
+    return encrypt_decrypt("decrypt", $_COOKIE["ehash"], $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"]) == get_client_ip();
 }
+
+function getLoginUsername(){
+    if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return;
+    return encrypt_decrypt("decrypt",$_COOKIE["usr"],get_client_ip());
+}
+
+function rmdir_recursive($dir) {
+    foreach(scandir($dir) as $file) {
+        if ('.' === $file || '..' === $file) continue;
+        if (is_dir("$dir/$file")) rmdir_recursive("$dir/$file");
+        else unlink("$dir/$file");
+    }
+    rmdir($dir);
+}
+
 ?>
