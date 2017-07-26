@@ -64,7 +64,7 @@ class DB{
         
         $i=0;
         foreach($data as $key => $value){
-            if($i!=0) $sql .= " , "
+            if($i!=0) $sql .= " , ";
             $sql .= $key ." = :".$key;
         }
         $sql .= " WHERE `hash = :hash";

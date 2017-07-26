@@ -2,8 +2,14 @@
 
 
     require '../includes/auth.php';
-    require '../includes/sql.php';
+//    require '../includes/sql.php';
+    require '../includes/helper.php';
 
+if(isLogin()){
+    header("Location: ../index.php");
+    die();
+}
+        
 // define variables and set to empty values
 $method = $username = $password = "";
 
@@ -21,6 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if($loginSuccess){
         alert("sucessful login");
+        $hash = $db->select("usr","username",$username)["hash"];
+        setcookie('login', null, -1, '/');
+//        $_COOKIE["login"]="yes";
+        setcookie("ehash",encrypt_decrypt("encrypt",get_client_ip(),$hash),-1,"/");
+        setcookie("usr",encrypt_decrypt("encrypt",$username,get_client_ip()),-1,"/");
+//        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
+//        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
+        header("Location: ../index.php");
+        die();
     }
     else{
         alert("fail login");
@@ -67,26 +82,4 @@ function test_input($data) {
   return $data;
 }
 
-function get_client_ip() {
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'UNKNOWN';
-    return $ipaddress;
-}
-
-function alert($txt){
-    echo "<script>window.alert('".$txt."');</script>";
-}
 ?>
