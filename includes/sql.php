@@ -57,7 +57,7 @@ class DB{
         return $this->conn->query($sql);
     }
     
-    //update row with corresponding has in table with data
+    //TODO: update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
     public function update($table, $hash, $data){
         $sql = "UPDATE `".$table."` SET ";
