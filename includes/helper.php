@@ -96,7 +96,9 @@ if(!isset($helper_included)){
         return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     }
     
-    
+    function getGameUrl($mission_id){
+        return "http://tw.gamelet.com/gameContainer.do?code=csArena&gltParam=%7B'mode'%3A'userMission'%2C%20'id'%3A'".$mission_id."'%7D";
+    }
     
 }
 ?>

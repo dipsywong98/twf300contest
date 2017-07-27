@@ -14,6 +14,11 @@ else{
     }
 }
 
+if($db->numberOf("submits","mission_id","-1")==0){
+    alert("no submition need publish now");
+    redirect("../");
+}
+
 //finding a submit to publish
 $submit ="";
 
@@ -109,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db->delete("publishing",$hash);
     
     alert("success!");
-//    redirect("/");
+    redirect("../");
 }
 
 function isExpired($record){
