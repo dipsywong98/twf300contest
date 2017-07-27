@@ -2,21 +2,26 @@
 require "../includes/helper.php";
         
 // define variables and set to empty values
-$twf_name = $comment = $twf_doc = $twf_photo = $hash = "";
-$new_submit = true;
+$twf_name = $comment = $twf_doc = $twf_file = $twf_photo = $hash = "";
+$new_submit = true; $no_new_photo = false; $no_new_twf_file = false;
 
 if(isLogin()){
     $username = getLoginUsername();
     $hash = $db->select("usr","username",$username)["hash"];
     $submition = $db->select("submits","hash",$hash);
-    $new_submit = count($submition);
+    $new_submit = !count($submition);
     if(!$new_submit){
         //retrive old data
         $twf_name = $submition["twf_name"];
         $comment = $submition["comment"];
         $photo_type = $submition["photo_type"];
         $ip = $submition["ip"];
+        $comment = $submition["comment"];
     }
+}
+else{
+    header("Location: ../login");
+    die();
 }
 
 
@@ -37,20 +42,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $allowed =  array('twf');
     
     $tmp_twf_file = $_FILES["twf_file"];
-    if($tmp_twf_file["error"]==4) $error.="請於「作品twf檔」欄上載twf檔<br>";
+    if($tmp_twf_file["error"]==4){
+        if($new_submit){
+            $error.="請於「作品twf檔」欄上載twf檔<br>";
+        }
+        else{
+            $_FILES["twf_file"]["tmp_name"] = '../uploads/'.$hash."/".$hash.".twf";
+            $no_new_twf_file = true;
+        }
+    } 
     else if(!in_array(pathinfo($_FILES['twf_file']['name'], PATHINFO_EXTENSION),$allowed)) $error.="請確保你於「作品twf檔」欄上載的是twf檔<br>";
     else if($tmp_twf_file["error"]!=0) $error.="twf作品上載時發生錯誤，代碼:".$tmp_twf_file["error"]."<br>";
     
+    
     $tmp_twf_file = $_FILES["twf_photo"];
-    if($tmp_twf_file["error"]==4) $error.="請於「作品圖片」欄上載圖片<br>";
+    if($tmp_twf_file["error"]==4) {
+        if($new_submit){
+            $error.="請於「作品圖片」欄上載圖片<br>";
+        }
+        else{
+            $_FILES["twf_photo"]["tmp_name"] = '../uploads/'.$hash."/".$hash.".".$photo_type;
+            $no_new_photo = true;
+        }
+    }
     else if($tmp_twf_file["error"]!=0) $error.="圖片上載時發生錯誤，代碼:".$tmp_twf_file["error"]."<br>";
     
     echo "<span>".$error."</span>";
 //    echo "<script>window.alert('".$error."')</script>";
     
-    if(error==""){
-        if($new_submit){
+    if($error==""){
+        
+        $upload_success = save($hash);
+        if($no_new_photo)$upload_success = $photo_type;
+        if($upload_success){
+            if($db->numberOf("submits","hash",$hash)==0){
+                $db->insert("submits",[
+                    "hash"=>$hash,
+                    "twf_name"=>$twf_name,
+                    "comment"=>$comment,
+                    "ip"=>get_client_ip(),
+                    "photo_type"=>$upload_success
+                ]);
+            }
+            else {
+                $db->update("submits",$hash, [
+                    "twf_name"=>$twf_name,
+                    "comment"=>$comment,
+                    "ip"=>get_client_ip(),
+                    "photo_type"=>$upload_success
+                ]);
+            }
         }
+        
     }
     
 }
@@ -64,32 +107,39 @@ function test_input($data) {
     
 function save($hash){
     
-    $target_dir = "uploads/".$hash;
-    if (file_exists($target_dir)) {
-        rmdir_recursive($target_dir);
-    }
-    mkdir($target_dir, 0777, true);
+    $target_dir = "../uploads/".$hash;
+//    if (file_exists($target_dir)) {
+//        rmdir_recursive($target_dir);
+//    }
+//    mkdir($target_dir, 0777, true);
     
     $target_dir .= "/";
     
     //twf file
-    $upload_tag = "twf_file";
     $target_file = $target_dir . basename($hash.".twf");
-    move_uploaded_file($_FILES[$upload_tag]["tmp_name"],$target_file);
+    move_uploaded_file($_FILES["twf_file"]["tmp_name"],$target_file);
 //    echo $_FILES[$upload_tag]["error"];
     
     //twf photo
-    $upload_tag = "twf_photo";
-    $target_file = $target_dir . basename($hash.".".pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION));
-    move_uploaded_file($_FILES[$upload_tag]["tmp_name"],$target_file);
+    $photo_type = pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION);
+    $target_file = $target_dir . basename($hash.".".$photo_type);
+    move_uploaded_file($_FILES["twf_photo"]["tmp_name"],$target_file);
 //    echo $_FILES[$upload_tag]["error"];
     
-    if($_FILES["twf_file"]["error"]==0 && $_FILES["twf_photo"]["error"]==0){
-        echo "<script>window.alert('成功遞交')</script>";
-        
+    if($GLOBALS["no_new_photo"]||$_FILES["twf_photo"]["error"]==0){
+        if($GLOBALS["no_new_twf_file"]||$_FILES["twf_file"]["error"]==0){
+            echo "<script>window.alert('成功遞交')</script>";
+            return $photo_type;
+        }
     }
+    
+//    if($_FILES["twf_file"]["error"]==0 && $_FILES["twf_photo"]["error"]==0){
+//        echo "<script>window.alert('成功遞交')</script>";
+//        return $photo_type;
+//    }
     else{
         echo "<script>window.alert('遞交失敗，代碼：'".$_FILES[$upload_tag]["error"].$_FILES[$upload_tag]["error"].")</script>";
+        return false;
     }
     
 }

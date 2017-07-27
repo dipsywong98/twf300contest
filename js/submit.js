@@ -10,7 +10,7 @@ onload=function(){
                 reader.onload = function (e) {
                     $('#photo_preview').attr('src', e.target.result);
                 }
-
+                
                 reader.readAsDataURL($("#twf_photo")[0].files[0]);
             }
     })

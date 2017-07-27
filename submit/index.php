@@ -24,12 +24,12 @@
             <br><br>
 
             <p>作品圖片：</p>
-            <img id="photo_preview" width="300px" /><br>
-            <input type="file" name="twf_photo" id="twf_photo" accept="image/*" 
+            <img id="photo_preview" width="300px" 
                    <?php 
                    if($hash!="") 
-                       echo "src='../uploads/".$hash."'";
-                   ?>>
+                       echo "src='../uploads/".$hash."/".$hash.".".$photo_type."'";
+                   ?>/><br>
+            <input type="file" name="twf_photo" id="twf_photo" accept="image/*" >
             <br><br>
             
             <p>留言(不會被公佈):</p> 
