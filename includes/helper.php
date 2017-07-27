@@ -78,10 +78,13 @@ function redirect($url){
     echo '
         <script>
             var para = document.createElement("a");
-            para.href="'.$url.'";
+            para.href="'.$url.'?from='.getThisUrl().'";
             para.click();
         </script>
     ';
 }
 
+function getThisUrl(){
+    return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+}
 ?>

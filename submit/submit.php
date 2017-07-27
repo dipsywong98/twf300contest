@@ -20,7 +20,7 @@ if(isLogin()){
     }
 }
 else{
-    redirect("..login");
+    redirect("../login");
 }
 
 

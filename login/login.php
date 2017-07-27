@@ -5,9 +5,17 @@
 //    require '../includes/sql.php';
     require '../includes/helper.php';
 
-if(isLogin()){
-    redirect("../index.php");
+$from = "../index.php";
+
+if (array_key_exists("from",$_GET)){
+    $from = $_GET["from"];
 }
+echo $from;
+
+if(isLogin()){
+    redirect($from);
+}
+
         
 // define variables and set to empty values
 $method = $username = $password = "";
@@ -18,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $method = test_input($_POST["method"]);
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
+    $from = test_input($_POST["from"]);
     
     $loginSuccess = false;
     
@@ -33,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
 //        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
 //        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
-        redirect("../index.php");
+        redirect($from);
     }
     else{
         alert("fail login");
@@ -53,7 +62,7 @@ function loginByGamelet($db, $username, $password){
             //not a new user
             
             $user =  $db->select("usr","username",$username);
-            echo $user["hash"];
+//            echo $user["hash"];
             
             return true;
         }

@@ -12,7 +12,7 @@
         <?php require 'login.php'; ?>
 
         <h2>登入</h2>
-        <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+        <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>'>
             
             <p id="p_method">登入方式</p>
             <input type="radio" name="method" value="gamelet" checked> Gamelet
@@ -26,7 +26,8 @@
             <p>gamelet password</p>
             <input id="input_pw" type="password" name="password">
             <br><br> 
-
+            
+            <input type="hidden" name="from" value="<?php echo $from;?>">
             <input type="submit" name="submit" value="Submit">
         </form>
 </body>
