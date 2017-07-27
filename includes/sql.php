@@ -33,6 +33,14 @@ class DB{
             return $row;
         }
     }
+    public function selectAll($table, $column, $value){
+        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = :".$column."";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(array($column => $value));
+        $stmt = $stmt->fetchAll();
+        
+        return $stmt;
+    }
     
     //update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
@@ -71,6 +79,12 @@ class DB{
         
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($data);
+    }
+    
+    public function delete($table, $hash){
+        $sql = "DELETE FROM ".$table." WHERE hash=:hash";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(["hash"=>$hash]);
     }
     
 }

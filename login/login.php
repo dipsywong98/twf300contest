@@ -10,7 +10,6 @@ $from = "../index.php";
 if (array_key_exists("from",$_GET)){
     $from = $_GET["from"];
 }
-echo $from;
 
 if(isLogin()){
     redirect($from);

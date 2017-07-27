@@ -26,7 +26,7 @@
             <p>作品圖片：</p>
             <img id="photo_preview" width="300px" 
                    <?php 
-                   if($hash!="") 
+                   if(!$new_submit) 
                        echo "src='../uploads/".$hash."/".$hash.".".$photo_type."'";
                    ?>/><br>
             <input type="file" name="twf_photo" id="twf_photo" accept="image/*" >

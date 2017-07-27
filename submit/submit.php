@@ -9,7 +9,7 @@ if(isLogin()){
     $username = getLoginUsername();
     $hash = $db->select("usr","username",$username)["hash"];
     $submition = $db->select("submits","hash",$hash);
-    $new_submit = !count($submition);
+    $new_submit = !$db->numberOf("submits","hash",$hash);
     if(!$new_submit){
         //retrive old data
         $twf_name = $submition["twf_name"];
@@ -72,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($error==""){
         
         $upload_success = save($hash);
+        $photo_type = $upload_success;
         if($no_new_photo)$upload_success = $photo_type;
         if($upload_success){
             if($db->numberOf("submits","hash",$hash)==0){
@@ -112,7 +113,13 @@ function save($hash){
 //    if (file_exists($target_dir)) {
 //        rmdir_recursive($target_dir);
 //    }
-//    mkdir($target_dir, 0777, true);
+    if($GLOBALS["new_submit"]) mkdir($target_dir, 0777, true);
+    else{
+        if($GLOBALS["photo_type"]!=pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION)){
+            unlink("../uploads/".$hash."/".$hash.".".$GLOBALS["photo_type"]);
+//            $GLOBALS["photo_type"] = pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION);
+        }
+    }
     
     $target_dir .= "/";
     
