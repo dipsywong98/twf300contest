@@ -57,12 +57,12 @@ function isLogin(){
     if(count($_COOKIE)==0) return 0;
 //    return $_COOKIE["login"]=="yes";
     if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return 0;
-    return encrypt_decrypt("decrypt", $_COOKIE["ehash"], $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"]) == get_client_ip();
+    return encrypt_decrypt("decrypt", $_COOKIE["ehash"], getLoginUsername())== $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"] ;
 }
 
 function getLoginUsername(){
     if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return;
-    return encrypt_decrypt("decrypt",$_COOKIE["usr"],get_client_ip());
+    return encrypt_decrypt("decrypt",$_COOKIE["usr"],"fk is fucking handsome");
 }
 
 function rmdir_recursive($dir) {
@@ -72,6 +72,16 @@ function rmdir_recursive($dir) {
         else unlink("$dir/$file");
     }
     rmdir($dir);
+}
+
+function redirect($url){
+    echo '
+        <script>
+            var para = document.createElement("a");
+            para.href="'.$url.'";
+            para.click();
+        </script>
+    ';
 }
 
 ?>

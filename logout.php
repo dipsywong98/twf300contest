@@ -1,7 +1,17 @@
 <?php
+
     setcookie('login', null, -1, '/');
     setcookie("ehash",null,-1,"/");
     setcookie("usr",null,-1,"/");
-    header("Location: ../index.php");
-    die();
+    redirect("index.php");
+
+function redirect($url){
+    echo '
+        <script>
+            var para = document.createElement("a");
+            para.href="'.$url.'";
+            para.click();
+        </script>
+    ';
+}
 ?>

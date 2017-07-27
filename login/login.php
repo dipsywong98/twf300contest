@@ -6,8 +6,7 @@
     require '../includes/helper.php';
 
 if(isLogin()){
-    header("Location: ../index.php");
-    die();
+    redirect("../index.php");
 }
         
 // define variables and set to empty values
@@ -30,12 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hash = $db->select("usr","username",$username)["hash"];
         setcookie('login', null, -1, '/');
 //        $_COOKIE["login"]="yes";
-        setcookie("ehash",encrypt_decrypt("encrypt",get_client_ip(),$hash),-1,"/");
-        setcookie("usr",encrypt_decrypt("encrypt",$username,get_client_ip()),-1,"/");
+        setcookie("ehash",encrypt_decrypt("encrypt",$hash,$username),-1,"/");
+        setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
 //        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
 //        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
-        header("Location: ../index.php");
-        die();
+        redirect("../index.php");
     }
     else{
         alert("fail login");

@@ -20,8 +20,7 @@ if(isLogin()){
     }
 }
 else{
-    header("Location: ../login");
-    die();
+    redirect("..login");
 }
 
 
@@ -81,7 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "twf_name"=>$twf_name,
                     "comment"=>$comment,
                     "ip"=>get_client_ip(),
-                    "photo_type"=>$upload_success
+                    "photo_type"=>$upload_success,
+                    "mission_id"=>-1
                 ]);
             }
             else {
@@ -89,7 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "twf_name"=>$twf_name,
                     "comment"=>$comment,
                     "ip"=>get_client_ip(),
-                    "photo_type"=>$upload_success
+                    "photo_type"=>$upload_success,
+                    "mission_id"=>-1
                 ]);
             }
         }

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>登入300容量挑戰賽</title>
+    <title>登入 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/fbservice.js"></script>
     

@@ -69,11 +69,8 @@ class DB{
         }
         $sql .= $col.") VALUE (".$val.")";
         
-        echo $sql;
-        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($data);
-        echo $sql;
     }
     
 }
