@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($error==""){
         
         $upload_success = save($hash);
-        $photo_type = $upload_success;
+        if(!$no_new_photo) $photo_type = $upload_success;
         if($no_new_photo)$upload_success = $photo_type;
         if($upload_success){
             if($db->numberOf("submits","hash",$hash)==0){
@@ -115,7 +115,7 @@ function save($hash){
 //    }
     if($GLOBALS["new_submit"]) mkdir($target_dir, 0777, true);
     else{
-        if($GLOBALS["photo_type"]!=pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION)){
+        if($_FILES['twf_photo']['error']!=4){
             unlink("../uploads/".$hash."/".$hash.".".$GLOBALS["photo_type"]);
 //            $GLOBALS["photo_type"] = pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION);
         }

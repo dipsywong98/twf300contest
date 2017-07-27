@@ -69,7 +69,7 @@ if(!isset($helper_included)){
     }
 
     function isAdmin(){
-        $admin=["twf300_2017"];
+        $admin=["twf300_2017","facebookoffical","facebook_002"];
         return in_array(getLoginUsername(),$admin);
     }
 
