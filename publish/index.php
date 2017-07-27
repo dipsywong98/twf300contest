@@ -30,7 +30,7 @@
         $dt = new DateTime;
         $dt->setTimeStamp($db->select("publishing","hash",$hash)["expire"]);
         $dt->setTimeZone(new DateTimeZone("Asia/Hong_Kong"));
-        echo " 香港時間".$dt->format('Y年m月d日 H:i:s');
+        echo " 香港時間".$dt->format('Y年m月d日 H:i:s (A)');
         ?>之前公開，否則會有下一名評審代為公開</p>
     <button onclick="download('<?php echo"../uploads/".$hash."/".$hash.".twf";?>')">下載twf檔</button>
     <button onclick="download('<?php echo"../uploads/".$hash."/".$hash.".".$photo_type;?>')">下載圖片檔</button>
