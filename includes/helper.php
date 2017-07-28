@@ -67,6 +67,10 @@ if(!isset($helper_included)){
         if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return;
         return encrypt_decrypt("decrypt",$_COOKIE["usr"],"fk is fucking handsome");
     }
+    
+    function getLoginUserHash(){
+        return $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"];
+    }
 
     function isAdmin(){
         $admin=["twf300_2017","facebookoffical","facebook_002"];

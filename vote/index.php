@@ -3,8 +3,7 @@
 <head>
     <title>作品評分 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/fbservice.js"></script>
-    
+    <script src="vote.js"></script>
     
 </head>
 
@@ -21,10 +20,14 @@
     <iframe src="<?php echo getGameUrl($mission_id);?>" width="610px" height="510px" style="border:0px;"></iframe>
     
     <hr>
-    <h2>遊玩結束後請填寫此表</h2>
+    <h2>遊玩結束後請填評分</h2>
     
     <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+        <p id="desciptor"></p>
         
+        <input type="hidden" name="hash" value="<?php echo $hash;?>">
+        
+        <div id="mark_items"></div>
         
         <input type="submit" name="submit" value="Submit">
     </form>
