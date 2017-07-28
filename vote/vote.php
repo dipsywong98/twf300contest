@@ -19,12 +19,12 @@ foreach($submits as $submit){
     
     //no 自評
     if($hash == $voter_hash) {
-        echo "自評";
+        //echo "自評";
         continue;
     }
     //no 重評
     if(count($db->selectParams("votes",["voter_hash"=>$voter_hash,"hash"=>$hash]))!=0) {
-        echo "重平";
+        //echo "重平";
         continue;
     }
     
@@ -37,27 +37,27 @@ foreach($submits as $submit){
     
     $marks[$hash]=$mark;
     
-    echo $hash."分數".$mark."<br>";
+    //echo $hash."分數".$mark."<br>";
 }
 
-echo "<br>total ".count($marks)."<br>";
+//echo "<br>total ".count($marks)."<br>";
 
 if(count($marks)==0){
     alert("已經沒有可供評分的作品");
 //    redirect("../");
 }
 
-echo "<br> marks".print_r($marks);
+//echo "<br> marks".print_r($marks);
 asort($marks);
-echo "<br> marks".print_r($marks);
+//echo "<br> marks".print_r($marks);
 $hash = "";
 foreach ($marks as $key => $value) {
     $hash = $key;
-    echo $hash;
+    //echo $hash;
     break;
 }
 
-echo $hash;
+//echo $hash;
 
 $submit = $db->select("submits","hash",$hash);
 
