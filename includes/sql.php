@@ -50,7 +50,7 @@ class DB{
             $sql .= $key ." = :".$key;
         }
         
-        echo $sql;
+//        echo $sql;
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($param);
         return $stmt->fetchAll();

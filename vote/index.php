@@ -27,8 +27,11 @@
         
         <input type="hidden" name="hash" value="<?php echo $hash;?>">
         
-        <div id="mark_items"></div>
+        <table id="mark_items"></table>
         
+        <p>評語</p>
+        <textarea name="comment"></textarea>
+        <br><br>
         <input type="submit" name="submit" value="Submit">
     </form>
 </body>

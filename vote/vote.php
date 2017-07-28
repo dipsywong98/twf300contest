@@ -6,6 +6,10 @@ $ip = get_client_ip();
 $voter_hash = getLoginUserHash();
 $submits = $conn->query("SELECT * FROM submits");
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "recieved";
+}
+
 $marks = [];
 
 //push all potential missions
@@ -66,10 +70,6 @@ $photo_type = $submit["photo_type"];
 $twf_name = $submit["twf_name"];
 $mission_id = $submit["mission_id"];
 
-function insertion_sort($array,$key,$value){
-    foreach($array as $k=>$v){
-        
-    }
-}
+
 
 ?>
