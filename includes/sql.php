@@ -20,8 +20,8 @@ class DB{
     }
     
     //return the hash of first row in table with column value as value
-    public function select($table, $column, $value){
-        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` = :".$column."";
+    public function select($table, $column, $value, $op="="){
+        $sql = "SELECT * FROM `".$table."` WHERE `".$column."` ".$op." :".$column."";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(array($column => $value));
         $stmt = $stmt->fetchAll();
@@ -40,6 +40,20 @@ class DB{
         $stmt = $stmt->fetchAll();
         
         return $stmt;
+    }
+    public function selectParams($table, $param){
+        $sql = "SELECT * FROM `".$table."` WHERE ";
+        
+        $i=0;
+        foreach($param as $key => $value){
+            if($i++!=0) $sql .= " AND ";
+            $sql .= $key ." = :".$key;
+        }
+        
+        echo $sql;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($param);
+        return $stmt->fetchAll();
     }
     
     //update row with corresponding has in table with data
