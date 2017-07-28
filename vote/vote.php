@@ -2,12 +2,28 @@
 
 require "../includes/helper.php";
 
+if(!isLogin()){
+    redirect("../login");
+}
+
 $ip = get_client_ip();
 $voter_hash = getLoginUserHash();
 $submits = $conn->query("SELECT * FROM submits");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "recieved";
+    $db->insert("votes",[
+        "hash"=>$_POST["hash"],
+        "voter_hash"=>$voter_hash,
+        "voter_ip"=>$ip,
+        "mark_experience"=>$_POST["mark_experience"],
+        "mark_balance"=>$_POST["mark_balance"],
+        "mark_art"=>$_POST["mark_art"],
+        "mark_content"=>$_POST["mark_content"],
+        "mark_tech"=>$_POST["mark_tech"],
+        "mark_story"=>$_POST["mark_story"],
+        "mark_creative"=>$_POST["mark_creative"],
+        "comment"=>$_POST["comment"]
+    ]);
 }
 
 $marks = [];
@@ -48,7 +64,7 @@ foreach($submits as $submit){
 
 if(count($marks)==0){
     alert("已經沒有可供評分的作品");
-//    redirect("../");
+    redirect("../");
 }
 
 //echo "<br> marks".print_r($marks);

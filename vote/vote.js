@@ -86,7 +86,7 @@ window.onload = function () {
     for (var i = 0; i < scheme.length; i++) {
         var td = document.createElement("td");
         var select = document.createElement("select");
-        select.name = scheme[i].name;
+        select.name = "mark_"+scheme[i].name;
         select.innerHTML = "<option selected disabled>請評分</option>";
         for (var j = 5; j > 0; j--) {
             var option = document.createElement("option");
@@ -104,7 +104,8 @@ window.onload = function () {
 
     $('form').submit(function () {
 
-        window.alert();
+        if($("select").length==0)return false;
+        
         if ($("select[value='']").length) {
             alert("some empty value!");
             return false;
