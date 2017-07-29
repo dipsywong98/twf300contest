@@ -87,7 +87,7 @@ window.onload = function () {
         var td = document.createElement("td");
         var select = document.createElement("select");
         select.name = "mark_"+scheme[i].name;
-        select.innerHTML = "<option selected disabled>請評分</option>";
+        select.innerHTML = "<option selected disabled value=''>請評分</option>";
         for (var j = 5; j > 0; j--) {
             var option = document.createElement("option");
             var abbr = "";
@@ -101,14 +101,29 @@ window.onload = function () {
         tr.appendChild(td);
     }
     target.appendChild(tr);
+    
+    btn = document.createElement("input");
+    btn.type="submit";
+    btn.name="submit";
+    btn.value="submit";
+    btn.textContent="Submit";
+    $('form')[0].appendChild(btn);
 
     $('form').submit(function () {
-
+        
         if($("select").length==0)return false;
         
-        if ($("select[value='']").length) {
-            alert("some empty value!");
+        var msg="";
+        
+        for(var i=0;i<scheme.length;i++){
+            if($("select")[i].value==''){
+                msg+="請評"+scheme[i].text+"分\n";
+            }
+        }
+        if(msg!=''){
+            alert(msg);
             return false;
         }
+        
     });
 }

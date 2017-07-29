@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else if($method == "facebook") $loginSuccess = loginByFacebook();
     
     if($loginSuccess){
-        alert("sucessful login");
+//        alert("sucessful login");
         $hash = $db->select("usr","username",$username)["hash"];
         setcookie('login', null, -1, '/');
 //        $_COOKIE["login"]="yes";
