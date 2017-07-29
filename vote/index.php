@@ -75,7 +75,9 @@ $mission_list = [];
 $i=0;
 
 foreach ($marks as $key => $value) {
-    $mission_list[$i]=$key;
+    $obj = $db->select("submits","hash",$key);
+    $obj["mark"] = $value;
+    $mission_list[$i]=$obj;
     if(++$i>=3)break;
 }
 
@@ -97,22 +99,34 @@ foreach ($marks as $key => $value) {
         
         window.onload=function(){
             
-            var select = $("select[name='hash']")[0];
+            var select = $("#selects")[0];
             
             for (var i=0; i<missions.length;i++){
-                var option = document.createElement("option");
-                option.value=missions[i];
-                option.textContent=missions[i];
-                select.appendChild(option);
+                
+                var inp = document.createElement("input");inp.type="radio";inp.name="hash";inp.value=missions[i].hash;
+                var lbl = document.createElement("label");
+                var img = document.createElement("img");img.src="../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type;
+                img.style.height="300px";
+                inp.addEventListener("click",function(e){
+                    $("[type='submit']").click();
+                })
+                lbl.appendChild(img);
+                lbl.appendChild(inp);
+                select.appendChild(lbl);
             }
         }
     </script>
+    <style>
+        label > input{ /* HIDE RADIO */
+            visibility: hidden; /* Makes input not-clickable */
+            position: absolute; /* Remove input from document flow */
+        }
+    
+    </style>
 </head>
 <body>
     <form method="post" enctype="multipart/form-data" action='vote.php'>
-    <table></table>
-        <select name="hash">
-        </select>
+        <div id="selects"></div>
         <input type="submit" value="submit" name="submit">
     </form>
 </body>
