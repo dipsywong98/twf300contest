@@ -101,8 +101,10 @@ foreach ($marks as $key => $value) {
             
             var select = $("#selects")[0];
             
+            var tr = document.createElement("tr");
+            
             for (var i=0; i<missions.length;i++){
-                
+                var td = document.createElement("td");
                 var inp = document.createElement("input");inp.type="radio";inp.name="hash";inp.value=missions[i].hash;
                 var lbl = document.createElement("label");
                 var img = document.createElement("img");img.src="../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type;
@@ -112,8 +114,19 @@ foreach ($marks as $key => $value) {
                 })
                 lbl.appendChild(img);
                 lbl.appendChild(inp);
-                select.appendChild(lbl);
+                td.appendChild(lbl);
+                tr.appendChild(td);
             }
+            select.appendChild(tr);
+            tr = document.createElement("tr");
+            for(var i=0; i<missions.length;i++){
+                var td = document.createElement("td");
+                var p = document.createElement("p");
+                p.textContent = missions[i].twf_name;
+                td.appendChild(p);
+                tr.appendChild(td);
+            }
+            select.appendChild(tr);
         }
     </script>
     <style>
@@ -126,8 +139,8 @@ foreach ($marks as $key => $value) {
 </head>
 <body>
     <form method="post" enctype="multipart/form-data" action='vote.php'>
-        <div id="selects"></div>
-        <input type="submit" value="submit" name="submit">
+        <table id="selects"></table>
+        <input type="submit" value="submit" name="submit" style="">
     </form>
 </body>
 </html>
