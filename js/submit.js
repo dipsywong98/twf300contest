@@ -16,6 +16,10 @@ onload=function(){
     })
 }
 
-function previewPhoto(){
-    
-}
+
+    function download(url){
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download','<?php echo $hash?>.'+url.split(".")[3]);
+        link.click();
+    }
