@@ -17,6 +17,10 @@ if(isLogin()){
         $photo_type = $submition["photo_type"];
         $ip = $submition["ip"];
         $comment = $submition["comment"];
+        $time_min = $submition["time_min"];
+    }
+    else{
+        $time_min = 0;
     }
 }
 else{
@@ -82,7 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "comment"=>$comment,
                     "ip"=>get_client_ip(),
                     "photo_type"=>$upload_success,
-                    "mission_id"=>-1
+                    "mission_id"=>-1,
+                    "time_min"=>$_POST["time_min"]
                 ]);
             }
             else {
@@ -91,7 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "comment"=>$comment,
                     "ip"=>get_client_ip(),
                     "photo_type"=>$upload_success,
-                    "mission_id"=>-1
+                    "mission_id"=>-1,
+                    "time_min"=>$_POST["time_min"]
                 ]);
             }
         }

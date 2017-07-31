@@ -68,8 +68,32 @@ function listener() {
     console.log(Math.random());
 }
 
-window.onload = function () {
+function showBtn(){
+    
+    btn = document.createElement("input");
+    btn.type="submit";
+    btn.name="submit";
+    btn.value="submit";
+    btn.textContent="Submit";
+    $('form')[0].appendChild(btn);
+}
 
+function now(){return Math.floor(Date.now() / 1000);}
+
+function count(){
+    window.setTimeout(function(){
+        $("#text")[0].textContent = (start_time+time_min-now())+"秒後可以投票";
+        if(now()<start_time+time_min){
+            count();
+        }else{
+            $('#text')[0].parentElement.removeChild($('#text')[0]);
+            showBtn();
+        }
+       },1000);
+}
+
+window.onload = function () {
+    start_time = now();
     var target = $("#mark_items")[0];
     var descriptor = $("#descriptor")[0];
 
@@ -87,7 +111,7 @@ window.onload = function () {
         var td = document.createElement("td");
         var select = document.createElement("select");
         select.name = "mark_"+scheme[i].name;
-        select.innerHTML = "<option selected disabled>請評分</option>";
+        select.innerHTML = "<option selected disabled value=''>請評分</option>";
         for (var j = 5; j > 0; j--) {
             var option = document.createElement("option");
             var abbr = "";
@@ -101,14 +125,25 @@ window.onload = function () {
         tr.appendChild(td);
     }
     target.appendChild(tr);
+    
+    
+    count();
 
     $('form').submit(function () {
-
+        
         if($("select").length==0)return false;
         
-        if ($("select[value='']").length) {
-            alert("some empty value!");
+        var msg="";
+        
+        for(var i=0;i<scheme.length;i++){
+            if($("select")[i].value==''){
+                msg+="請評"+scheme[i].text+"分\n";
+            }
+        }
+        if(msg!=''){
+            alert(msg);
             return false;
         }
+        
     });
 }
