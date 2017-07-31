@@ -19,9 +19,14 @@
             <input type="text" name="twf_name" value="<?php echo $twf_name;?>">
             <br><br>
 
+            
             <p>作品twf檔：</p>
-            <input type="file" name="twf_file" id="twf_file" accept=".twf">
+            <?php 
+            if($new_submit) echo '<input type="file" name="twf_file" id="twf_file" accept=".twf">';
+            else echo '<p>遞交後不能更改twf檔</p>';
+            ?>
             <br><br>
+            
 
             <p>作品圖片：</p>
             <img id="photo_preview" width="300px" 

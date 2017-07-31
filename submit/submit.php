@@ -44,19 +44,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $allowed =  array('twf');
     
-    $tmp_twf_file = $_FILES["twf_file"];
-    if($tmp_twf_file["error"]==4){
-        if($new_submit){
-            $error.="請於「作品twf檔」欄上載twf檔<br>";
-        }
-        else{
-            $_FILES["twf_file"]["tmp_name"] = '../uploads/'.$hash."/".$hash.".twf";
-            $no_new_twf_file = true;
-        }
-    } 
-    else if(!in_array(pathinfo($_FILES['twf_file']['name'], PATHINFO_EXTENSION),$allowed)) $error.="請確保你於「作品twf檔」欄上載的是twf檔<br>";
-    else if($tmp_twf_file["error"]!=0) $error.="twf作品上載時發生錯誤，代碼:".$tmp_twf_file["error"]."<br>";
-    
+    if($new_submit){
+        $tmp_twf_file = $_FILES["twf_file"];
+        if($tmp_twf_file["error"]==4){
+            if($new_submit){
+                $error.="請於「作品twf檔」欄上載twf檔<br>";
+            }
+            else{
+                $_FILES["twf_file"]["tmp_name"] = '../uploads/'.$hash."/".$hash.".twf";
+                $no_new_twf_file = true;
+            }
+        } 
+        else if(!in_array(pathinfo($_FILES['twf_file']['name'], PATHINFO_EXTENSION),$allowed)) $error.="請確保你於「作品twf檔」欄上載的是twf檔<br>";
+        else if($tmp_twf_file["error"]!=0) $error.="twf作品上載時發生錯誤，代碼:".$tmp_twf_file["error"]."<br>";
+    }else{
+        $no_new_twf_file = true;
+    }
     
     $tmp_twf_file = $_FILES["twf_photo"];
     if($tmp_twf_file["error"]==4) {
@@ -96,7 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "comment"=>$comment,
                     "ip"=>get_client_ip(),
                     "photo_type"=>$upload_success,
-                    "mission_id"=>-1,
                     "time_min"=>$_POST["time_min"]
                 ]);
             }
@@ -130,10 +132,11 @@ function save($hash){
     $target_dir .= "/";
     
     //twf file
+    if($GLOBALS["new_submit"]){
     $target_file = $target_dir . basename($hash.".twf");
     move_uploaded_file($_FILES["twf_file"]["tmp_name"],$target_file);
 //    echo $_FILES[$upload_tag]["error"];
-    
+    }
     //twf photo
     $photo_type = pathinfo($_FILES['twf_photo']['name'], PATHINFO_EXTENSION);
     $target_file = $target_dir . basename($hash.".".$photo_type);
