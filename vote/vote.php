@@ -20,6 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $photo_type = $submit["photo_type"];
     $twf_name = $submit["twf_name"];
     $mission_id = $submit["mission_id"];
+    if(isset($submit["time_min"])){
+        $time_min = $submit["time_min"];
+    }
+    else{
+        $time_min = 0;
+    }
 }
 else{
     redirect("index.php");
@@ -34,8 +40,10 @@ else{
 <head>
     <title>作品評分 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        var time_min = <?php echo $time_min;?>;
+    </script>
     <script src="vote.js"></script>
-    
 </head>
 
 <body>
@@ -62,6 +70,8 @@ else{
         <p>評語</p>
         <textarea name="comment"></textarea>
         <br><br>
+        
+        <p id="text"></p>
     </form>
 </body>
 </html>

@@ -140,7 +140,7 @@ foreach ($marks as $key => $value) {
 <body>
     <form method="post" enctype="multipart/form-data" action='vote.php'>
         <table id="selects"></table>
-        <input type="submit" value="submit" name="submit" style="">
+        <input type="submit" value="submit" name="submit" style="visibility: hidden;">
     </form>
 </body>
 </html>

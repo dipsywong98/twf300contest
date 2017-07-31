@@ -68,8 +68,32 @@ function listener() {
     console.log(Math.random());
 }
 
-window.onload = function () {
+function showBtn(){
+    
+    btn = document.createElement("input");
+    btn.type="submit";
+    btn.name="submit";
+    btn.value="submit";
+    btn.textContent="Submit";
+    $('form')[0].appendChild(btn);
+}
 
+function now(){return Math.floor(Date.now() / 1000);}
+
+function count(){
+    window.setTimeout(function(){
+        $("#text")[0].textContent = (start_time+time_min-now())+"秒後可以投票";
+        if(now()<start_time+time_min){
+            count();
+        }else{
+            $('#text')[0].parentElement.removeChild($('#text')[0]);
+            showBtn();
+        }
+       },1000);
+}
+
+window.onload = function () {
+    start_time = now();
     var target = $("#mark_items")[0];
     var descriptor = $("#descriptor")[0];
 
@@ -102,12 +126,8 @@ window.onload = function () {
     }
     target.appendChild(tr);
     
-    btn = document.createElement("input");
-    btn.type="submit";
-    btn.name="submit";
-    btn.value="submit";
-    btn.textContent="Submit";
-    $('form')[0].appendChild(btn);
+    
+    count();
 
     $('form').submit(function () {
         

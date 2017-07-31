@@ -32,6 +32,10 @@
             <input type="file" name="twf_photo" id="twf_photo" accept="image/*" >
             <br><br>
             
+            <p>最短遊玩時間(秒):<br>作用：評分時，玩家過了這個秒數才可以遞交分數，請你慎重填寫</p>
+            <input type="number" name="time_min" min="0" value="<?php echo $time_min;?>">
+            <br><br>
+            
             <p>留言(不會被公佈):</p> 
             <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
             <br><br>
