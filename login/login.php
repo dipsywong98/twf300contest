@@ -99,7 +99,7 @@ function loginByFacebook(){
     if($db->numberOf("third_party_auth","third_party_ac",$GLOBALS["third_party_ac"])){
         if($db->select("third_party_auth","third_party_ac",$GLOBALS["third_party_ac"])["authentic_token"]=="success"){
             //authented
-            $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
+            $GLOBALS["username"] = $db->select("usr","third_party_ac",$GLOBALS["third_party_ac"])["username"];
             return true;
         }
     }
