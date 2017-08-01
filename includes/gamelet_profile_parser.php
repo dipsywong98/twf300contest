@@ -1,29 +1,37 @@
 <?php
 
-$url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
 
+function tokenExist($by, $tk){
+    $url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
+    $index=0;
+    $username="";
+    $token="";
+    $content = file($url);
+    foreach ($content as $k=>$r){
+        if(str_contain($r,'<div id="userComment')&&!str_contain($r,'<div id="userComments')&&!str_contain($content[$k+2],'悄悄話')){
+            //start of comment
+            //index + 2 會找到個資連結
+            $username = explode("_",explode('http://twstatic.gamelet.com/gamelet/users/',$content[$k+2])[1])[0];
+            echo "<br><br>".$username . " (".$k."<br>";
 
-$content = file($url);
-foreach ($content as $k=>$r){
-    if(str_contain($r,'<div id="userComment')&&!str_contain($r,'<div id="userComments')&&!str_contain($content[$k+2],'悄悄話')){
-        //start of comment
-        //index + 2 會找到個資連結
-        $username = explode("_",explode('http://twstatic.gamelet.com/gamelet/users/',$content[$k+2])[1])[0];
-        echo $username . " (".$k."<br>";
+            $index=$k;
+
+        }
+        if(str_contain($r,'<div class="pContent"><span style="')&&str_contain($r,'</span></div>')){
+            if($k<$index+9)
+                $token = explode("</",explode(">",explode("><",$r)[1])[1])[0];
+        }
+        elseif(str_contain($r,'<div class="pContent">')&&str_contain($r,'</div>')){
+            if($k<$index+9)
+                $token = explode("<",explode('>',$r)[1])[0];
+        }
+        if($by==$username && $token==$tk){
+            return true;
+        }
+
     }
+    return false;
 }
-//print_r($content);
-
-
-
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
 function str_contain($str1,$str2){
     if (strpos($str1, $str2) !== false) {
         return true;

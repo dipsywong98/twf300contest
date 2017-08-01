@@ -27,7 +27,7 @@ window.fbAsyncInit = function () {
      submit = $("input[type='submit']");
      $('form').submit(function () {
         
-         if(!newFB){
+         if(newFB==false){
              //old fb login can directly submit
              return true;
          }
@@ -40,7 +40,7 @@ window.fbAsyncInit = function () {
          if($("[name='password']")[0].value==''&&$("[name='method']")[0].value=="gamelet"){
              msg+="請輪入嘎姆密碼\n";
          }
-         if(!$("[name='username']")[0].value.includes($("[name='method']")[0].value)){
+         if(!$("[name='username']")[0].value.includes($("[name='method']")[0].value)&&$("[name='method']")[0].value!="gamelet"){
             msg+="嘎姆帳號必須含有 @"+$("[name='method']")[0].value;
         }
          if(msg!=""){
@@ -65,7 +65,8 @@ window.fbAsyncInit = function () {
                  console.log(result);
                  newFB = result;
                  
-                 if(!newFB){
+                 if(newFB==false){
+                     $("[name='method']")[0].value = "facebook";
                      $('[name="submit"]').click();
                  }
                  else{

@@ -96,52 +96,54 @@ function loginByGamelet($db, $username, $password){
 
 function loginByFacebook(){
     $db = $GLOBALS["db"];
-    if($db->select("third_party_auth","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["authentic_token"]=="success"){
-        //authented
-        $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
+    if($db->numberOf("third_party_auth","third_party_ac",$GLOBALS["third_party_ac"])){
+        if($db->select("third_party_auth","third_party_ac",$GLOBALS["third_party_ac"])["authentic_token"]=="success"){
+            //authented
+            $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
+            return true;
+        }
+    }
+    
+    //not authented
+
+    if($db->numberOf("usr","third_party_ac",$GLOBALS["third_party_ac"])==0){
+
+        //totally new user
+
+        //check if this user is using registered and authented ac
+
+        if($db->numberOf("third_party_auth","username",$GLOBALS["username"]))
+        if($db->select("third_party_auth","username",$GLOBALS["username"])["authentic_token"]=="success"){
+            alert("你正企圖綁定一個已被綁定的嘎姆帳號");
+            return false;
+        }
+
+        $hash = md5(uniqid(rand(), true));
+        $ip = get_client_ip();
+        $db->insert("usr",[
+            "username"=>$GLOBALS["username"],
+            "hash"=>$hash,
+            "ip"=>$ip,
+            "type"=>"facebook",
+            "third_party_ac"=>$GLOBALS["third_party_ac"]
+        ]);
+
+        $db->insert("third_party_auth",[
+            "username"=>$GLOBALS["username"],
+            "third_party_ac"=>$GLOBALS["third_party_ac"],
+            "authentic_token"=>md5(uniqid(rand(), true))
+        ]);
+
+        $GLOBALS["from"]="auth.php";
         return true;
     }
     else{
-        //not authented
-        
-        if($db->numberOf("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])==0){
-            
-            //totally new user
-            
-            //check if this user is using registered and authented ac
-            
-            if($db->numberOf("third_party_auth","username",$GLOBALS["username"]))
-            if($db->select("third_party_auth","username",$GLOBALS["username"])["authentic_token"]=="success"){
-                alert("你正企圖綁定一個已被綁定的嘎姆帳號");
-                return false;
-            }
-            
-            $hash = md5(uniqid(rand(), true));
-            $ip = get_client_ip();
-            $db->insert("usr",[
-                "username"=>$GLOBALS["username"],
-                "hash"=>$hash,
-                "ip"=>$ip,
-                "type"=>"facebook",
-                "third_party_ac"=>$GLOBALS["third_party_ac"]
-            ]);
-            
-            $db->insert("third_party_auth",[
-                "username"=>$GLOBALS["username"],
-                "third_party_ac"=>$GLOBALS["third_party_ac"],
-                "authentic_token"=>md5(uniqid(rand(), true))
-            ]);
-            
-            $GLOBALS["from"]="auth.php";
-            return true;
-        }
-        else{
-            //old user, but haven't authented
-            $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
-            $GLOBALS["from"]="auth.php";
-            return true;
-        }
+        //old user, but haven't authented
+        $GLOBALS["username"] = $db->select("usr","third_party_ac",$GLOBALS["third_party_ac"])["username"];
+        $GLOBALS["from"]="auth.php";
+        return true;
     }
+    
 }
 
 function test_input($data) {

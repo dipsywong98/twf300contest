@@ -13,7 +13,8 @@ $user = $db->selectParams("third_party_auth",[
 ]);
 
 if(count($user)==0) {
-    alert("error");
+    echo "error".getLoginUsername()."\n".getLoginThirdPartyAc();
+//    alert($str);
     die();
 }
 $user = $user[0];
@@ -22,6 +23,63 @@ $username = $user["username"];
 $third_party_ac = $user["third_party_ac"];
 $token = $user["authentic_token"];
 
+//if the user have post the token in twf300_2017 profile page
+if(tokenExist($username,$token)){
+    $sql = "UPDATE `third_party_auth` SET authentic_token = 'success' WHERE username = :username AND third_party_ac = :third_party_ac";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        "username"=>$username,
+        "third_party_ac"=>$third_party_ac
+    ]);
+    
+    //把冒充者刪去
+    $sql = "DELETE FROM `third_party_auth` WHERE username = :username AND third_party_ac != :third_party_ac";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        "username"=>$username,
+        "third_party_ac"=>$third_party_ac
+    ]);
+    alert("成功驗証！");
+    redirect("../");
+}
+
+function tokenExist($by, $tk){
+    $url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
+    $index=0;
+    $username="";
+    $token="";
+    $content = file($url);
+    foreach ($content as $k=>$r){
+        if(str_contain($r,'<div id="userComment')&&!str_contain($r,'<div id="userComments')&&!str_contain($content[$k+2],'悄悄話')){
+            //start of comment
+            //index + 2 會找到個資連結
+            $username = explode("_",explode('http://twstatic.gamelet.com/gamelet/users/',$content[$k+2])[1])[0];
+//            echo "<br><br>".$username . " (".$k."<br>";
+
+            $index=$k;
+
+        }
+        if(str_contain($r,'<div class="pContent"><span style="')&&str_contain($r,'</span></div>')){
+            if($k<$index+9)
+                $token = explode("</",explode(">",explode("><",$r)[1])[1])[0];
+        }
+        elseif(str_contain($r,'<div class="pContent">')&&str_contain($r,'</div>')){
+            if($k<$index+9)
+                $token = explode("<",explode('>',$r)[1])[0];
+        }
+        if($by==$username && $token==$tk){
+            return true;
+        }
+
+    }
+    return false;
+}
+function str_contain($str1,$str2){
+    if (strpos($str1, $str2) !== false) {
+        return true;
+    }
+    return false;
+}
 
 ?>
 
