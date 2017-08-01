@@ -101,6 +101,13 @@ class DB{
         $stmt->execute(["hash"=>$hash]);
     }
     
+    public function all($table){
+        $sql = "SELECT * FROM ".$table;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([]);
+        return $stmt->fetchAll();
+    }
+    
 }
 
 $db = new DB($conn);
