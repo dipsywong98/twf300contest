@@ -5,6 +5,7 @@ require "../includes/helper.php";
 if(!isLogin()){
     redirect("../login");
 }
+else if(!isThirdAuth()) redirect("../login/auth.php");
 
 $ip = get_client_ip();
 $voter_hash = getLoginUserHash();

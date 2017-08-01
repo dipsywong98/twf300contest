@@ -56,6 +56,13 @@ if(!isset($helper_included)){
         return $output;
     }
 
+    function isThirdAuth(){
+        $db = $GLOBALS["db"];
+        if($db->select("usr","username",getLoginUsername())["type"]=="gamelet") return true;
+        if($db->select("third_party_auth","username",getLoginUsername())["authentic_token"]=="success") return true;
+        return false;
+    }
+    
     function isLogin(){
         if(count($_COOKIE)==0) return 0;
     //    return $_COOKIE["login"]=="yes";

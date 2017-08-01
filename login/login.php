@@ -23,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //handle POST contents
     
     $method = test_input($_POST["method"]);
-    $username = test_input($_POST["username"]);
-    $password = test_input($_POST["password"]);
+    if(isset($_POST["username"]))$username = test_input($_POST["username"]);
+    if($method == "gamelet") $password = test_input($_POST["password"]);
+    else $third_party_ac = test_input($_POST["third_party_ac"]);
     $from = test_input($_POST["from"]);
     
     $loginSuccess = false;
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
 //        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
 //        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
-        redirect($from);
+//        redirect($from);
     }
     else{
         alert("fail login");
@@ -84,6 +85,30 @@ function loginByGamelet($db, $username, $password){
     }
     else {
         return false;
+    }
+}
+
+function loginByFacebook(){
+    $db = $GLOBALS["db"];
+    if($db->numberOf("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])){
+        //authented
+        $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
+        return true;
+    }
+    else{
+        //not authented
+        
+        $hash = md5(uniqid(rand(), true));
+            $ip = get_client_ip();
+            $db->insert("usr",[
+                "username"=>$GLOBALS["username"],
+                "hash"=>$hash,
+                "ip"=>$ip,
+                "type"=>"facebook",
+                "third_party_ac"=>$GLOBALS["third_party_ac"]
+            ]);
+        $GLOBALS["from"]="auth.php";
+        return true;
     }
 }
 

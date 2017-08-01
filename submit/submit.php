@@ -6,6 +6,7 @@ $twf_name = $comment = $twf_doc = $twf_file = $twf_photo = $hash = "";
 $new_submit = true; $no_new_photo = false; $no_new_twf_file = false;
 
 if(isLogin()){
+    if(!isThirdAuth()) redirect("../login/auth.php");
     $username = getLoginUsername();
     $hash = $db->select("usr","username",$username)["hash"];
     $submition = $db->select("submits","hash",$hash);
