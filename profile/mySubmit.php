@@ -30,7 +30,6 @@ else{
     </script>
     <script>
         window.onload = function(){
-        var titles = ["id","平均分"]
         
         var tb = $("#tb")[0];
         var tr = document.createElement("tr");
