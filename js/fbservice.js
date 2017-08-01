@@ -38,8 +38,11 @@ window.fbAsyncInit = function () {
             msg+="請輪入嘎姆帳號\n";
         }
          if($("[name='password']")[0].value==''&&$("[name='method']")[0].value=="gamelet"){
-             msg+="請輪入嘎姆密碼";
+             msg+="請輪入嘎姆密碼\n";
          }
+         if(!$("[name='username']")[0].value.includes($("[name='method']")[0].value)){
+            msg+="嘎姆帳號必須含有 @"+$("[name='method']")[0].value;
+        }
          if(msg!=""){
              alert(msg);
              return false;

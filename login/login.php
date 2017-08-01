@@ -12,6 +12,9 @@ if (array_key_exists("from",$_GET)){
 }
 
 if(isLogin()){
+    if(!isThirdAuth()){
+        redirect("auth.php");
+    }
     redirect($from);
 }
 
@@ -31,7 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginSuccess = false;
     
     if($method == "gamelet") $loginSuccess = loginByGamelet($db,$username,$password);
-    else if($method == "facebook") $loginSuccess = loginByFacebook();
+    else if($method == "facebook"){
+        $loginSuccess = loginByFacebook();
+        setcookie("third",encrypt_decrypt("encrypt",$GLOBALS["third_party_ac"],$GLOBALS["username"]),-1,"/");
+    } 
     
     if($loginSuccess){
 //        alert("sucessful login");
@@ -42,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
 //        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
 //        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
-//        redirect($from);
+        redirect($from);
     }
     else{
         alert("fail login");
@@ -90,7 +96,7 @@ function loginByGamelet($db, $username, $password){
 
 function loginByFacebook(){
     $db = $GLOBALS["db"];
-    if($db->numberOf("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])){
+    if($db->select("third_party_auth","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["authentic_token"]=="success"){
         //authented
         $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
         return true;
@@ -98,7 +104,19 @@ function loginByFacebook(){
     else{
         //not authented
         
-        $hash = md5(uniqid(rand(), true));
+        if($db->numberOf("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])==0){
+            
+            //totally new user
+            
+            //check if this user is using registered and authented ac
+            
+            if($db->numberOf("third_party_auth","username",$GLOBALS["username"]))
+            if($db->select("third_party_auth","username",$GLOBALS["username"])["authentic_token"]=="success"){
+                alert("你正企圖綁定一個已被綁定的嘎姆帳號");
+                return false;
+            }
+            
+            $hash = md5(uniqid(rand(), true));
             $ip = get_client_ip();
             $db->insert("usr",[
                 "username"=>$GLOBALS["username"],
@@ -107,8 +125,22 @@ function loginByFacebook(){
                 "type"=>"facebook",
                 "third_party_ac"=>$GLOBALS["third_party_ac"]
             ]);
-        $GLOBALS["from"]="auth.php";
-        return true;
+            
+            $db->insert("third_party_auth",[
+                "username"=>$GLOBALS["username"],
+                "third_party_ac"=>$GLOBALS["third_party_ac"],
+                "authentic_token"=>md5(uniqid(rand(), true))
+            ]);
+            
+            $GLOBALS["from"]="auth.php";
+            return true;
+        }
+        else{
+            //old user, but haven't authented
+            $GLOBALS["username"] = $db->select("usr","third_party_ac",explode($GLOBALS["third_party_ac"],"@")[0])["username"];
+            $GLOBALS["from"]="auth.php";
+            return true;
+        }
     }
 }
 
