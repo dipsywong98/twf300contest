@@ -72,6 +72,7 @@ if($submit==""){
 $twf_name = $submit["twf_name"];
 $hash = $submit["hash"];
 $photo_type = $submit["photo_type"];
+$comment = $submit["comment"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     

@@ -41,7 +41,7 @@
             <input type="number" name="time_min" min="0" value="<?php echo $time_min;?>">
             <br><br>
             
-            <p>留言(不會被公佈):</p> 
+            <p>留言(不會被公佈，但依然需要遵守匿名等規則):</p> 
             <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
             <br><br>
 

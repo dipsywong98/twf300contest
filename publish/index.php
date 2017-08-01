@@ -26,6 +26,8 @@
     
     <p>作品名稱：<?php echo $twf_name;?></p>
     <p>作家編號：<?php echo $hash;?></p>
+    <p>留言：</p>
+    <p><?php echo $comment;?></p>
     <p>需在<?php 
         $dt = new DateTime;
         $dt->setTimeStamp($db->select("publishing","hash",$hash)["expire"]);
