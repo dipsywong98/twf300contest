@@ -67,7 +67,7 @@ else{
         <input type="hidden" name="hash" value="<?php echo $hash;?>">
         
         <table id="mark_items"></table>
-        
+        <p>平均分：<span id="avg"></span>分</p>
         <p>評語</p>
         <textarea name="comment"></textarea>
         <br><br>

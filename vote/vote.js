@@ -64,6 +64,7 @@ scheme = [
     },
 ]
 
+
 function listener() {
     console.log(Math.random());
 }
@@ -126,7 +127,19 @@ window.onload = function () {
     }
     target.appendChild(tr);
     
-    
+    $("select").on("change",function(){
+        var marks = $("select");
+        var v=0;
+        for(var i=0;i<marks.length;i++){
+            var d=marks[i].value;
+            if(d!=""){
+                v=(v*i+Number(d))/(i+1);
+            }
+        }
+        console.log(v);
+        $("#avg")[0].innerHTML = v;
+    });
+
     count();
 
     $('form').submit(function () {
