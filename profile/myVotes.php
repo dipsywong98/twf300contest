@@ -37,6 +37,19 @@ else{
     </script>
     <script>
         
+        function format(timestamp){
+            console.log(timestamp);
+            var date = new Date(timestamp*1000);
+            var month = date.getMonth()+1;
+            var dat = date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            
+//            console.log(month,dat);
+            return month+"月"+dat+"日 "+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        }
+        
         Sortable.init()
         
         window.onload = function(){
@@ -47,6 +60,9 @@ else{
         var tr = document.createElement("tr");
         var td = document.createElement("th");
         td.textContent = "任務名稱";
+        tr.appendChild(td);
+        td = document.createElement("th");
+            td.textContent = "投票時間";
         tr.appendChild(td);
         td = document.createElement("th");
         td.textContent = "平均分";
@@ -71,8 +87,11 @@ else{
             
             tr = document.createElement("tr");
             td = document.createElement("td");
-            
             td.textContent = missions[j]["twf_name"];
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.textContent = format(votes[j]["vote_time"]);
+            td["data-value"] = votes[j]["vote_time"];
             tr.appendChild(td);
             tr.appendChild(avg);
             for(var i=0;i<scheme.length;i++){
@@ -88,13 +107,13 @@ else{
             avg.textContent = av/scheme.length;
         }
             
-            $('table').DataTable();
+            
 
         }
     </script>
     
 </head>
-    <h2>投票資訊</h2>
+    <h2>我的投票</h2>
     <table class="sortable" data-sortable>
         <thead></thead>
         <tbody></tbody>
