@@ -36,7 +36,11 @@ $votes = $db->all("votes");
 .demo-card-square > .mdl-card__title {
   color: #fff;
   background:
-    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+    url('../assets/demos/dog.png') 100% no-repeat #46B6AC;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    text-shadow: 1px 1px 3px #000000;
 }
 </style>
     <script>
@@ -89,13 +93,18 @@ $votes = $db->all("votes");
             a = newElement(_c,"div","mdl-card__supporting-text");
             a.innerHTML = text;
             a = newElement(_c,"div","mdl-card__actions mdl-card--border");
-            h = newElement(_c,"a","mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect");
-            h.innerHTML = "BUTTON";
+            h = newElement(a,"a","mdl-button mdl-button--colored mdl-js-ripple-effect mdl-js-button");
+            h.innerHTML = "VIEW VOTES";
             return _c;
         }
         
         window.onload =function(){
-            newSquareCard($("#tab1-panel")[0],"testestt","lorem ipsum","https://topick.hket.com/res/v3/image/content/1870000/1870712/KakaoTalk_20170801_181430217_1024.jpg");
+            var submits_view = $("#tab1-panel")[0];
+            for(var i=0 ; i<submits.length ; i++ ){
+                var url = "uploads/"+submits[i]["hash"]+"/"+submits[i]["hash"]+"."+submits[i]["photo_type"];
+                newSquareCard(submits_view,submits[i]["twf_name"],"lorem ipsum",url);
+            }
+            
         }
         
     </script>
