@@ -91,7 +91,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "ip"=>get_client_ip(),
                     "photo_type"=>$upload_success,
                     "mission_id"=>-1,
-                    "time_min"=>$_POST["time_min"]
+                    "time_min"=>$_POST["time_min"],
+                    "submit_time"=>time()
                 ]);
             }
             else {

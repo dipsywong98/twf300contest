@@ -110,7 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $mission_id = $_POST["mission_id"];
     $db->update("submits",$hash,[
-        "mission_id"=>$mission_id
+        "mission_id"=>$mission_id,
+        "publish_time"=>time()
     ]);
     $db->delete("publishing",$hash);
     

@@ -75,6 +75,7 @@ else{
     </script>
     
 </head>
+    <?php require "../nav_bar.php";?>
     <h2>作品資訊</h2>
     <table id="tb">
     

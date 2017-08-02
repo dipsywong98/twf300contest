@@ -12,6 +12,7 @@ $submits = $conn->query("SELECT * FROM submits");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db->insert("votes",[
+        "vote_time"=>time(),
         "hash"=>$_POST["hash"],
         "voter_hash"=>$voter_hash,
         "voter_ip"=>$ip,
