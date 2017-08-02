@@ -20,6 +20,7 @@ else{
     <title>我的投票 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/scheme.js"></script>
+    <script src="../js/sortable.min.js"></script>
     <script>
     <?php
         if(isset($votes)){
@@ -35,25 +36,34 @@ else{
     ?>
     </script>
     <script>
-        window.onload = function(){
         
-        var tb = $("#tb")[0];
+        Sortable.init()
+        
+        window.onload = function(){
+            
+            Sortable.initTable($('table')[0]);
+        
+        var tb = $("thead")[0];
         var tr = document.createElement("tr");
-        var td = document.createElement("td");
+        var td = document.createElement("th");
         td.textContent = "任務名稱";
         tr.appendChild(td);
-        td = document.createElement("td");
+        td = document.createElement("th");
         td.textContent = "平均分";
+            td.classList.add("num");
         tr.appendChild(td);
         for(var i=0;i<scheme.length;i++){
-            td = document.createElement("td");
+            td = document.createElement("th");
+            td.classList.add("num");
             td.textContent = scheme[i].text;
             tr.appendChild(td);
         }
-        td = document.createElement("td");
+        td = document.createElement("th");
         td.textContent = "評語";
         tr.appendChild(td);
         tb.appendChild(tr);
+            
+            tb = $("tbody")[0];
         
             var avg = document.createElement("td");
             var av= 0;
@@ -77,13 +87,17 @@ else{
             tb.appendChild(tr);
             avg.textContent = av/scheme.length;
         }
+            
+            $('table').DataTable();
+
         }
     </script>
     
 </head>
     <h2>投票資訊</h2>
-    <table id="tb">
-    
+    <table class="sortable" data-sortable>
+        <thead></thead>
+        <tbody></tbody>
     </table>
     
     
