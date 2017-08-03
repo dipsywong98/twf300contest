@@ -48,7 +48,9 @@ else{
 </head>
 
 <body>
-    
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
+    <main class="mdl-layout__content">  
     <h2>作品評分</h2>
         
 <!--    <img width="300px" src="../uploads/<?php echo $hash."/".$hash.".".$photo_type;?>"/>-->
@@ -74,5 +76,7 @@ else{
         
         <p id="text"></p>
     </form>
+        </main>
+    </div>
 </body>
 </html>
