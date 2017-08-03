@@ -19,8 +19,15 @@ else{
 <head>
     <title>我的投票 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+		<!-- Material Design icon font -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="../js/scheme.js"></script>
+    <script src="../js/list.min.js"></script>
     <script src="../js/sortable.min.js"></script>
+    <script src="../js/helper.js"></script>
+    <script src="../js/scheme.js"></script>
     <script>
     <?php
         if(isset($votes)){
@@ -35,89 +42,16 @@ else{
     
     ?>
     </script>
-    <script>
-        
-        function format(timestamp){
-            console.log(timestamp);
-            var date = new Date(timestamp*1000);
-            var month = date.getMonth()+1;
-            var dat = date.getDate();
-            var hours = date.getHours();
-            var minutes = "0" + date.getMinutes();
-            var seconds = "0" + date.getSeconds();
-            
-//            console.log(month,dat);
-            return month+"月"+dat+"日 "+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        }
-        
-        Sortable.init()
-        
-        window.onload = function(){
-            
-            Sortable.initTable($('table')[0]);
-        
-        var tb = $("thead")[0];
-        var tr = document.createElement("tr");
-        var td = document.createElement("th");
-        td.textContent = "任務名稱";
-        tr.appendChild(td);
-        td = document.createElement("th");
-            td.textContent = "投票時間";
-        tr.appendChild(td);
-        td = document.createElement("th");
-        td.textContent = "平均分";
-            td.classList.add("num");
-        tr.appendChild(td);
-        for(var i=0;i<scheme.length;i++){
-            td = document.createElement("th");
-            td.classList.add("num");
-            td.textContent = scheme[i].text;
-            tr.appendChild(td);
-        }
-        td = document.createElement("th");
-        td.textContent = "評語";
-        tr.appendChild(td);
-        tb.appendChild(tr);
-            
-            tb = $("tbody")[0];
-        
-            var avg = document.createElement("td");
-            var av= 0;
-        for (var j=0; j<votes.length; j++){
-            
-            tr = document.createElement("tr");
-            td = document.createElement("td");
-            td.textContent = missions[j]["twf_name"];
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.textContent = format(votes[j]["vote_time"]);
-            td["data-value"] = votes[j]["vote_time"];
-            tr.appendChild(td);
-            tr.appendChild(avg);
-            for(var i=0;i<scheme.length;i++){
-                var td = document.createElement("td");
-                av+=votes[j]["mark_"+scheme[i].name];
-                td.textContent = votes[j]["mark_"+scheme[i].name];
-                tr.appendChild(td);
-            }
-            var td = document.createElement("td");
-            td.textContent = votes[j]["comment"];
-            tr.appendChild(td);
-            tb.appendChild(tr);
-            avg.textContent = av/scheme.length;
-        }
-            
-            
-
-        }
-    </script>
     
 </head>
     <h2>我的投票</h2>
+    <div id="xd"><script>newVoteTable($("#xd")[0],votes,missions)</script></div>
+<!--
     <table class="sortable" data-sortable>
         <thead></thead>
         <tbody></tbody>
     </table>
+-->
     
     
 </html>

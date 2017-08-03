@@ -7,7 +7,7 @@ if(!isLogin())
 else{
     if(!isAdmin()){
         alert("你未獲得授權");
-        redirect("");
+        redirect("index.php");
         die();
     }
 }

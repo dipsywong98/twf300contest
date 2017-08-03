@@ -21,9 +21,11 @@
 
             
             <p>作品twf檔：</p>
+            <input type="file" name="twf_file" id="twf_file" accept=".twf">
+
             <?php 
-            if($new_submit) echo '<input type="file" name="twf_file" id="twf_file" accept=".twf">';
-            else echo '<p>遞交後不能更改twf檔</p>';
+//            if($new_submit) echo '<input type="file" name="twf_file" id="twf_file" accept=".twf">';
+//            else echo '<p>遞交後不能更改twf檔</p>';
             ?>
             <br><br>
             

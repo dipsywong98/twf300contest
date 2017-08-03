@@ -16,6 +16,7 @@ else{
     <title>我的作品 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/scheme.js"></script>
+    <script src="../js/sortable.min.js"></script>
     <script>
     <?php
         if(isset($votes)){
@@ -75,7 +76,6 @@ else{
     </script>
     
 </head>
-    <?php require "../nav_bar.php";?>
     <h2>作品資訊</h2>
     <table id="tb">
     
