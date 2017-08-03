@@ -23,7 +23,7 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
         <title>我的投票 - 300容量挑戰賽</title>
         <script src="../js/jquery-3.2.1.min.js"></script>
         <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
-        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
         <!-- Material Design icon font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script src="../js/scheme.js"></script>
@@ -60,7 +60,8 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
         
         
     <body>
-        
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
     <main class="mdl-layout__content">    
         <div style="align:center;">
          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -87,6 +88,7 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
          </div>  
         </div>
 	  </main>  
+        </div>
     </body>
 
 

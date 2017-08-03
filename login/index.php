@@ -8,7 +8,9 @@
 
 <body>
         <?php require 'login.php'; ?>
-
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
+        <main>
         <h2>登入</h2>
         <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>'>
             
@@ -29,5 +31,6 @@
             <input type="hidden" name="third_party_ac" value="<?php if(isset($third_part_ac))echo $third_party_ac;?>">
             <input type="submit" name="submit" value="Submit">
         </form>
+    </main></div>
 </body>
 </html>

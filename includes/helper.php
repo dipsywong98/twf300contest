@@ -1,12 +1,14 @@
 <?php
 
 
-ob_start();
-session_start();
+
 
 if(!isset($helper_included)){
     $helper_included = true;
 
+    ob_start();
+session_start();
+    
     require "sql.php";
 
     function get_client_ip() {
@@ -115,6 +117,21 @@ if(!isset($helper_included)){
         ';
     }
 
+    function getRoot(){
+        $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+        if(!str_contain($root,"contest")){
+            $root.="contest/";
+        }
+        return $root;
+    }
+
+    function str_contain($str1,$str2){
+        if (strpos($str1, $str2) !== false) {
+            return true;
+        }
+        return false;
+    }
+    
     function getThisUrl(){
         return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     }

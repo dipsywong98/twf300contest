@@ -194,6 +194,9 @@ foreach ($marks as $key => $value) {
     </style>
 </head>
 <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
+        <main>
     <div class="mdl-grid center-items" id="selects">
     
     </div>
@@ -201,5 +204,7 @@ foreach ($marks as $key => $value) {
         <input type="hidden" value="" name="hash">
         <input type="submit" value="submit" name="submit" style="visibility: hidden;">
     </form>
+        </main>
+    </div>
 </body>
 </html>

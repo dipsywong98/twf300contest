@@ -12,7 +12,9 @@
     <?php
     require "submit.php";
 ?>
-
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
+        <main>
         <h2>300容量挑戰賽報名表</h2>
         <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
             <p>作品名稱:</p>
@@ -49,7 +51,7 @@
 
             <input type="submit" name="submit" value="Submit">
         </form>
-
+    </main>
 </body>
 
 </html>

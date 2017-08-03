@@ -24,10 +24,9 @@ $votes = $db->all("votes");
 <head>
     <title>控制台 - 300容量挑戰賽</title>
     <script src="js/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
       <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Square card -->
 <style>
 .demo-card-square.mdl-card {
   width: 320px;
@@ -111,7 +110,8 @@ $votes = $db->all("votes");
 </head>
     <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-          
+        <?php require "nav_bar.php";?>
+        
       <main class="mdl-layout__content">    
          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">

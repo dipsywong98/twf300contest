@@ -19,7 +19,9 @@
         link.click();
     }
     </script>
-    
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <?php require "../nav_bar.php";?>
+        <main>
     <h2>公開作品</h2>
         
     <img width="300px" src="../uploads/<?php echo $hash."/".$hash.".".$photo_type;?>"/>
@@ -58,5 +60,6 @@
         
         <input type="submit" name="submit" value="Submit">
     </form>
+        </main>
 </body>
 </html>

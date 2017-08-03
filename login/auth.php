@@ -149,12 +149,12 @@ function tokenExist($by, $tk){
     }
     return false;
 }
-function str_contain($str1,$str2){
-    if (strpos($str1, $str2) !== false) {
-        return true;
-    }
-    return false;
-}
+//function str_contain($str1,$str2){
+//    if (strpos($str1, $str2) !== false) {
+//        return true;
+//    }
+//    return false;
+//}
 
 ?>
 
