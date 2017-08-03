@@ -5,7 +5,7 @@
 //    setcookie("usr",null,-1,"/");
 //    setcookie("third",null,-1,"/");
     session_start();
-    unset($_SEESION['valid']);
+    unset($_SESSION['valid']);
     unset($_SESSION['timeout']);
     unset($_SESSION['usr']);
     unset($_SESSION['hash']);
