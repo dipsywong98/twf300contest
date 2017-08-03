@@ -97,9 +97,17 @@ function newVoteTable(parent, votes, missions) {
         newTh(tr, "td", "comment", votes[j]["comment"]);
     }
 
+    if(missions!=""){
     var options = {
             valueNames: ['twf_name', 'vote_time', 'mark_avg', 'mark_experience', 'mark_balance', 'mark_art', 'mark_content', 'mark_tech', 'mark_story', 'mark_creative', 'comment']
         },
+        documentTable = new List(parent, options);}
+    else{
+        
+    var options = {
+            valueNames: ['vote_time', 'mark_avg', 'mark_experience', 'mark_balance', 'mark_art', 'mark_content', 'mark_tech', 'mark_story', 'mark_creative', 'comment']
+        },
         documentTable = new List(parent, options);
+    }
     return table;
 }

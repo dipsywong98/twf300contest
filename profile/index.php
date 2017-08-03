@@ -1,7 +1,7 @@
 <?php
 require "../includes/helper.php";
 
-$missions = [];
+$missions = $recieves = $votes = [];
 
 if($db->numberOf("votes","voter_hash",getLoginUserHash())){
     $votes = $db->selectAll("votes","voter_hash",getLoginUserHash());
@@ -9,8 +9,10 @@ if($db->numberOf("votes","voter_hash",getLoginUserHash())){
         array_push($missions,$db->select("submits","hash",$vote["hash"]));
     }
 }
-else{
-    alert("你沒有投過票");
+if($db->numberOf("submits","hash",getLoginUserHash())){
+    $submit = $db->select("submits","hash",getLoginUserHash());
+    $recieves = $db->selectAll("votes","hash",getLoginUserHash());
+//    print_r($recieves);
 }
 
 ?>
@@ -31,34 +33,61 @@ else{
         <script src="../js/scheme.js"></script>
         <script>
             <?php
-        if(isset($votes)){
+        
             $js_array = json_encode($votes);
             echo "var votes = ". $js_array . ";\n";
             $js_array = json_encode($missions);
             echo "var missions = ". $js_array . ";\n";
-        }
-        else{
-            echo "var votes = [];";
-        }
+        
+            
+            
+            $js_array = json_encode($recieves);
+            echo "var recieves = ". $js_array . ";\n";
     
     ?>
 
         </script>
-
+<!--
+<style>
+        
+        .center-items {
+          justify-content: center;
+        }
+    
+    </style>
+-->
     </head>
-    <h2>我的投票</h2>
-    <div id="xd">
+        
+        
+    <body>
+        
+    <main class="mdl-layout__content">    
+        <div style="align:center;">
+         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+            <div class="mdl-tabs__tab-bar">
+               <a href="#tab1-panel" class="mdl-tabs__tab is-active">我的作品</a>
+               <a href="#tab2-panel" class="mdl-tabs__tab">我的投票</a>
+            </div>
+            <div class="mdl-tabs__panel is-active" id="tab1-panel">
+               <div id="lol">
+        <script>
+            newVoteTable($("#lol")[0], recieves, "")
+
+        </script>
+    </div>
+            </div>
+            <div class="mdl-tabs__panel" id="tab2-panel">
+               <div id="xd">
         <script>
             newVoteTable($("#xd")[0], votes, missions)
 
         </script>
     </div>
-    <!--
-    <table class="sortable" data-sortable>
-        <thead></thead>
-        <tbody></tbody>
-    </table>
--->
+            </div>
+         </div>  
+        </div>
+	  </main>  
+    </body>
 
 
     </html>
