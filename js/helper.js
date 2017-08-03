@@ -55,6 +55,15 @@ function newTh(parent, element, class_list, text) {
 }
 
 function newVoteTable(parent, votes, missions) {
+    //search bar
+    var form = newElement(parent,"form","");
+    form.setAttribute("action","#");
+    var div = newElement(form,"div","mdl-textfield mdl-js-textfield mdl-textfield--floating-label");
+    var input = newElement(div,"input","mdl-textfield__input search");
+    input.type="text";
+    input.id="search"
+    newTh(div,"label","mdl-textfield__label","搜尋").setAttribute("for","search");
+    
     //generate table
     var table = newElement(parent, "table", "mdl-data-table mdl-js-data-table");
     //    Sortable.initTable(table);
@@ -89,11 +98,8 @@ function newVoteTable(parent, votes, missions) {
     }
 
     var options = {
-            valueNames: ['vote_time', 'mark_avg', 'mark_experience', 'mark_balance', 'mark_art', 'mark_content', 'mark_tech', 'mark_story', 'mark_creative']
+            valueNames: ['twf_name', 'vote_time', 'mark_avg', 'mark_experience', 'mark_balance', 'mark_art', 'mark_content', 'mark_tech', 'mark_story', 'mark_creative', 'comment']
         },
-        documentTable = new List(table, options);
-$($('th.sort')[0]).trigger('click', function() {
-            console.log('clicked');
-        });
+        documentTable = new List(parent, options);
     return table;
 }
