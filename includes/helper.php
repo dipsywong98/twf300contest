@@ -1,5 +1,9 @@
 <?php
 
+
+ob_start();
+session_start();
+
 if(!isset($helper_included)){
     $helper_included = true;
 
@@ -68,19 +72,22 @@ if(!isset($helper_included)){
     }
     
     function isLogin(){
-        if(count($_COOKIE)==0) return 0;
-    //    return $_COOKIE["login"]=="yes";
-        if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return 0;
-        return encrypt_decrypt("decrypt", $_COOKIE["ehash"], getLoginUsername())== $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"] ;
+        return isset($_SESSION["valid"]);
+//        if(count($_COOKIE)==0) return 0;
+//    //    return $_COOKIE["login"]=="yes";
+//        if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return 0;
+//        return encrypt_decrypt("decrypt", $_COOKIE["ehash"], getLoginUsername())== $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"] ;
     }
 
     function getLoginUsername(){
-        if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return;
-        return encrypt_decrypt("decrypt",$_COOKIE["usr"],"fk is fucking handsome");
+        return $_SESSION["usr"];
+//        if(!isset($_COOKIE['usr'])||!isset($_COOKIE['ehash']))return;
+//        return encrypt_decrypt("decrypt",$_COOKIE["usr"],"fk is fucking handsome");
     }
     
     function getLoginUserHash(){
-        return $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"];
+        return $_SESSION["hash"];
+//        return $GLOBALS["db"]->select("usr","username",getLoginUsername())["hash"];
     }
 
     function isAdmin(){

@@ -18,7 +18,6 @@ if(isLogin()){
     redirect($from);
 }
 
-        
 // define variables and set to empty values
 $method = $username = $password = "";
 
@@ -36,16 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($method == "gamelet") $loginSuccess = loginByGamelet($db,$username,$password);
     else if($method == "facebook"){
         $loginSuccess = loginByFacebook();
-        setcookie("third",encrypt_decrypt("encrypt",$GLOBALS["third_party_ac"],$GLOBALS["username"]),-1,"/");
+//        setcookie("third",encrypt_decrypt("encrypt",$GLOBALS["third_party_ac"],$GLOBALS["username"]),-1,"/");
+        $_SESSION["third"] = $GLOBALS["third_party_ac"];
     } 
     
     if($loginSuccess){
 //        alert("sucessful login");
         $hash = $db->select("usr","username",$username)["hash"];
-        setcookie('login', null, -1, '/');
-//        $_COOKIE["login"]="yes";
-        setcookie("ehash",encrypt_decrypt("encrypt",$hash,$username),-1,"/");
-        setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
+        
+        
+        $_SESSION['valid'] = true;
+        $_SESSION['timeout'] = time();
+        $_SESSION['usr'] = $username;
+        $_SESSION['hash'] = $hash;
+//        setcookie("ehash",encrypt_decrypt("encrypt",$hash,$username),-1,"/");
+//        setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
 //        $_COOKIE["ehash"]=encrypt_decrypt("encrypt",get_client_ip(),$hash);
 //        $_COOKIE["usr"]=encrypt_decrypt("encrypt",$username,get_client_ip());
         redirect($from);
