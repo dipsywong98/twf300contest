@@ -94,40 +94,92 @@ foreach ($marks as $key => $value) {
     ?>
     </script>
     <script src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+      <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Square card -->
+<style>
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('../assets/demos/dog.png') 100% no-repeat #46B6AC;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    text-shadow: 1px 1px 3px #000000;
+}
+</style>
     <script>
         
-       
+       function newElement(parent,element,class_list){
+            _x = document.createElement(element);
+            class_list = class_list.split(" ");
+            for (var i=0; i<class_list.length; i++){
+                _x.classList.add(class_list[i]);
+            }
+            parent.appendChild(_x);
+            console.log(parent,_x);
+            return _x; 
+        }
+        
+        function newSquareCard(parent,title,text,url,hash){
+            _c = newElement(parent,"div","demo-card-square mdl-card mdl-shadow--2dp");
+            var a = newElement(_c,"div","mdl-card__title mdl-card--expand");
+            a.style.backgroundImage = "url('"+url+"')";
+            var h = newElement(a,"h2","mdl-card__title-text");
+            h.innerHTML = title;
+            a = newElement(_c,"div","mdl-card__supporting-text");
+            a.innerHTML = text;
+            a = newElement(_c,"div","mdl-card__actions mdl-card--border");
+            h = newElement(a,"a","mdl-button mdl-button--colored mdl-js-ripple-effect mdl-js-button");
+            h.innerHTML = "PLAY";
+            h.addEventListener("click",function(e){
+                $("[name='hash']")[0].value = hash;
+                    $("[type='submit']").click();
+                })
+            return _c;
+        }
         
         window.onload=function(){
             
-            var select = $("#selects")[0];
-            
-            var tr = document.createElement("tr");
-            
+//            var tr = newElement($("#selects")[0],"div","mdl-cell mdl-cell--4-col");
             for (var i=0; i<missions.length;i++){
-                var td = document.createElement("td");
-                var inp = document.createElement("input");inp.type="radio";inp.name="hash";inp.value=missions[i].hash;
-                var lbl = document.createElement("label");
-                var img = document.createElement("img");img.src="../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type;
-                img.style.height="300px";
-                inp.addEventListener("click",function(e){
-                    $("[type='submit']").click();
-                })
-                lbl.appendChild(img);
-                lbl.appendChild(inp);
-                td.appendChild(lbl);
-                tr.appendChild(td);
+                var td= newElement($("#selects")[0],"div","mdl-cell mdl-cell--4-col");
+                newSquareCard(td,missions[i].twf_name,"","../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type,missions[i].hash)
             }
-            select.appendChild(tr);
-            tr = document.createElement("tr");
-            for(var i=0; i<missions.length;i++){
-                var td = document.createElement("td");
-                var p = document.createElement("p");
-                p.textContent = missions[i].twf_name;
-                td.appendChild(p);
-                tr.appendChild(td);
-            }
-            select.appendChild(tr);
+            
+//            var select = $("#selects")[0];
+//            
+//            var tr = document.createElement("tr");
+//            
+//            for (var i=0; i<missions.length;i++){
+//                var td = document.createElement("td");
+//                var inp = document.createElement("input");inp.type="radio";inp.name="hash";inp.value=missions[i].hash;
+//                var lbl = document.createElement("label");
+//                var img = document.createElement("img");img.src="../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type;
+//                img.style.height="300px";
+//                inp.addEventListener("click",function(e){
+//                    $("[type='submit']").click();
+//                })
+//                lbl.appendChild(img);
+//                lbl.appendChild(inp);
+//                td.appendChild(lbl);
+//                tr.appendChild(td);
+//            }
+//            select.appendChild(tr);
+//            tr = document.createElement("tr");
+//            for(var i=0; i<missions.length;i++){
+//                var td = document.createElement("td");
+//                var p = document.createElement("p");
+//                p.textContent = missions[i].twf_name;
+//                td.appendChild(p);
+//                tr.appendChild(td);
+//            }
+//            select.appendChild(tr);
         }
     </script>
     <style>
@@ -139,8 +191,11 @@ foreach ($marks as $key => $value) {
     </style>
 </head>
 <body>
+    <div class="mdl-grid" id="selects">
+    
+    </div>
     <form method="post" enctype="multipart/form-data" action='vote.php'>
-        <table id="selects"></table>
+        <input type="hidden" value="" name="hash">
         <input type="submit" value="submit" name="submit" style="visibility: hidden;">
     </form>
 </body>
