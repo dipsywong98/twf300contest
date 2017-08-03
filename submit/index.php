@@ -1,3 +1,6 @@
+<?php
+    require "submit.php";
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,9 +12,7 @@
 
 <body>
 
-    <?php
-    require "submit.php";
-?>
+    
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
         <main>
