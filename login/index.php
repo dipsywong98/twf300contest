@@ -1,3 +1,4 @@
+<?php require 'login.php'; ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,7 +8,7 @@
 </head>
 
 <body>
-        <?php require 'login.php'; ?>
+        
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
         <main>

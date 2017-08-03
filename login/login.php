@@ -1,9 +1,7 @@
 <?php
-
-
+    require '../includes/helper.php';
     require '../includes/auth.php';
 //    require '../includes/sql.php';
-    require '../includes/helper.php';
 
 $from = "../index.php";
 
