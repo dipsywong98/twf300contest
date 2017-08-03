@@ -13,7 +13,7 @@ class GameletLoginVerification {
 
 	}
 
-	public function _checkLogin() {
+	private function _checkLogin() {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,"https://tw.gamelet.com/gwtremoting/userService");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:text/x-gwt-rpc; charset=UTF-8'));
