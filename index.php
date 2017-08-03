@@ -1,6 +1,17 @@
 <html>
 <head>
-<title>首頁 - 300容量挑戰賽</title>    
+<title>首頁 - 300容量挑戰賽</title> 
+    <style>
+.demo-layout-transparent {
+  background: url('../assets/demos/transparent.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+</style>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
