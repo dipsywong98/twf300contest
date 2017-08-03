@@ -2,6 +2,7 @@
 
 
 function tokenExist($by, $tk){
+    echo $by." ".$tk."<br>";
     $url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
     $index=0;
     $username="";
@@ -25,6 +26,7 @@ function tokenExist($by, $tk){
             if($k<$index+9)
                 $token = explode("<",explode('>',$r)[1])[0];
         }
+        echo $username." ".$token."<br>";
         if($by==$username && $token==$tk){
             return true;
         }

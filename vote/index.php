@@ -149,7 +149,7 @@ foreach ($marks as $key => $value) {
 //            var tr = newElement($("#selects")[0],"div","mdl-cell mdl-cell--4-col");
             for (var i=0; i<missions.length;i++){
                 var td= newElement($("#selects")[0],"div","mdl-cell mdl-cell--4-col");
-                newSquareCard(td,missions[i].twf_name,"","../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type,missions[i].hash)
+                newSquareCard(td,missions[i].twf_name,"","../uploads/"+missions[i].hash+"/"+missions[i].hash+"."+missions[i].photo_type,missions[i].hash);
             }
             
 //            var select = $("#selects")[0];
@@ -187,11 +187,14 @@ foreach ($marks as $key => $value) {
             visibility: hidden; /* Makes input not-clickable */
             position: absolute; /* Remove input from document flow */
         }
+        .mdl-grid.center-items {
+          justify-content: center;
+        }
     
     </style>
 </head>
 <body>
-    <div class="mdl-grid" id="selects">
+    <div class="mdl-grid center-items" id="selects">
     
     </div>
     <form method="post" enctype="multipart/form-data" action='vote.php'>

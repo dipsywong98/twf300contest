@@ -61,7 +61,8 @@ if(!isset($helper_included)){
     }
 
     function getLoginThirdPartyAc(){
-        return encrypt_decrypt("decrypt",$_COOKIE["third"],getLoginUsername());
+        return $_SESSION["third"];
+//        return encrypt_decrypt("decrypt",$_COOKIE["third"],getLoginUsername());
     }
     
     function isThirdAuth(){

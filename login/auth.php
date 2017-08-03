@@ -10,6 +10,12 @@ if(isThirdAuth()) redirect("../");
 $type = $db->select("usr","username",getLoginUsername())["type"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if($db->numberOf("usr","username",$_POST["username"]))
+        if($db->select("usr","username",$_POST["username"])["type"]=="gamelet"){
+            alert("你正企圖綁定一個已被綁定的嘎姆帳號");
+            redirect("");
+            return false;
+        }
     if($db->numberOf("third_party_auth","username",$_POST["username"]))
         if($db->select("third_party_auth","username",$_POST["username"])["authentic_token"]=="success"){
             alert("你正企圖綁定一個已被綁定的嘎姆帳號");
@@ -23,11 +29,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         die();
     }
     
-    if(!str_contain($_POST["username"],"@".$type.".com")){
-        alert("嘎姆帳號必須含有 @".$type.".com");
-        redirect("");
-        die();
-    }
+//    if(!str_contain($_POST["username"],"@".$type.".com")){
+//        alert("嘎姆帳號必須含有 @".$type.".com");
+//        redirect("");
+//        die();
+//    }
     
     $old_username = getLoginUsername();
     $third_party_ac = getLoginThirdPartyAc();
@@ -110,6 +116,7 @@ function test_input($data) {
 }
 
 function tokenExist($by, $tk){
+//    echo $by." ".$tk."<br>";
     $url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
     $index=0;
     $username="";
@@ -119,8 +126,9 @@ function tokenExist($by, $tk){
         if(str_contain($r,'<div id="userComment')&&!str_contain($r,'<div id="userComments')&&!str_contain($content[$k+2],'悄悄話')){
             //start of comment
             //index + 2 會找到個資連結
-            $username = explode("_",explode('http://twstatic.gamelet.com/gamelet/users/',$content[$k+2])[1])[0];
-//            echo "<br><br>".$username . " (".$k."<br>";
+            $username = explode('" title=',explode('?username=',$content[$k+2])[1])[0];
+            $username = str_replace("%40","@",$username);
+            echo "<br><br>".$username . " (".$k."<br>";
 
             $index=$k;
 
@@ -133,6 +141,7 @@ function tokenExist($by, $tk){
             if($k<$index+9)
                 $token = explode("<",explode('>',$r)[1])[0];
         }
+//        echo $username." ".$token."<br>";
         if($by==$username && $token==$tk){
             return true;
         }

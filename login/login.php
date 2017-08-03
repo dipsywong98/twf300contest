@@ -115,7 +115,11 @@ function loginByFacebook(){
         //totally new user
 
         //check if this user is using registered and authented ac
-
+        if($db->numberOf("usr","username",$GLOBALS["username"]))
+        if($db->select("usr","username",$GLOBALS["username"])["type"]=="gamelet"){
+            alert("你正企圖綁定一個已被綁定的嘎姆帳號");
+            return false;
+        }
         if($db->numberOf("third_party_auth","username",$GLOBALS["username"]))
         if($db->select("third_party_auth","username",$GLOBALS["username"])["authentic_token"]=="success"){
             alert("你正企圖綁定一個已被綁定的嘎姆帳號");

@@ -40,9 +40,9 @@ window.fbAsyncInit = function () {
          if($("[name='password']")[0].value==''&&$("[name='method']")[0].value=="gamelet"){
              msg+="請輪入嘎姆密碼\n";
          }
-         if(!$("[name='username']")[0].value.includes($("[name='method']")[0].value)&&$("[name='method']")[0].value!="gamelet"){
-            msg+="嘎姆帳號必須含有 @"+$("[name='method']")[0].value;
-        }
+//         if(!$("[name='username']")[0].value.includes($("[name='method']")[0].value)&&$("[name='method']")[0].value!="gamelet"){
+//            msg+="嘎姆帳號必須含有 @"+$("[name='method']")[0].value;
+//        }
          if(msg!=""){
              alert(msg);
              return false;
