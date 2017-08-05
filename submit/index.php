@@ -42,7 +42,7 @@
             <input type="file" name="twf_photo" id="twf_photo" accept="image/*" >
             <br><br>
             
-            <p>最短遊玩時間(秒):<br>作用：評分時，玩家過了這個秒數才可以遞交分數，請你慎重填寫</p>
+            <p>最短遊玩時間(秒):<br>作用：評分時，玩家過了這個秒數才可以遞交分數，請你慎重填寫(時間上限：600秒，即10分鐘)</p>
             <input type="number" name="time_min" min="0" max="600" value="<?php echo $time_min;?>">
             <br><br>
             
