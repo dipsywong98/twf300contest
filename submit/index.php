@@ -43,7 +43,7 @@
             <br><br>
             
             <p>最短遊玩時間(秒):<br>作用：評分時，玩家過了這個秒數才可以遞交分數，請你慎重填寫</p>
-            <input type="number" name="time_min" min="0" value="<?php echo $time_min;?>">
+            <input type="number" name="time_min" min="0" max="600" value="<?php echo $time_min;?>">
             <br><br>
             
             <p>留言(不會被公佈，但依然需要遵守匿名等規則):</p> 
