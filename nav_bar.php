@@ -36,7 +36,7 @@ function print_nav_list(){
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-<header class="mdl-layout__header">
+<header class="mdl-layout__header mdl-shadow--8dp">
     <div class="mdl-layout__header-row">
       <a class="mdl-layout-title mdl-navigation__link" href="<?php echo getRoot();?>index.php">300容量挑戰賽</a>
       <div class="mdl-layout-spacer"></div>

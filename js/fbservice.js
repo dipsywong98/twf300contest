@@ -1,10 +1,21 @@
 window.fbAsyncInit = function () {
-     FB.init({
+    var root = location.protocol + '//' + location.host;
+    if(root=="http://localhost"){
+        FB.init({
+      appId      : '313394302404659',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    }
+    else{
+        FB.init({
          appId: '220547211801669',
          cookie: true,
          xfbml: true,
          version: 'v2.8'
      });
+    }
+     
      FB.AppEvents.logPageView();
 
  };
@@ -51,7 +62,9 @@ window.fbAsyncInit = function () {
     });
  }
 
-
+function remove(str){
+    $(str)[0].parentElement.removeChild($(str)[0]);
+}
  var newFB = true;
  
  function FBlogin() {
@@ -70,10 +83,7 @@ window.fbAsyncInit = function () {
                      $('[name="submit"]').click();
                  }
                  else{
-                     $("#pw")[0].parentElement.removeChild($("#pw")[0]);
-                     $("[type='password']")[0].parentElement.removeChild($("[type='password']")[0]);
-                     $("[value='gamelet']")[0].parentElement.removeChild($("[value='gamelet']")[0]);
-                     $("[value='gamelet']")[0].parentElement.removeChild($("[value='gamelet']")[0]);
+                     remove("#rg");remove("#rg");remove("#rg");
                      window.alert("新FB登入者請在嘎姆帳號欄，填寫你用該FB帳登入的嘎姆帳號");
                  }
              }});
