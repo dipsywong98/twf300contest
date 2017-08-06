@@ -9,6 +9,27 @@ if(isThirdAuth()) redirect("../");
 
 $type = $db->select("usr","username",getLoginUsername())["type"];
 
+if(isset($_GET["token"])){
+    if($db->select("third_party_auth","username",getLoginUsername())["authentic_token"]==$_GET["token"]){
+        $sql = "UPDATE `third_party_auth` SET authentic_token = 'success' WHERE username = :username AND third_party_ac = :third_party_ac";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+        "username"=>$username,
+        "third_party_ac"=>$third_party_ac
+    ]);
+    
+    //把冒充者刪去
+    $sql = "DELETE FROM `third_party_auth` WHERE username = :username AND third_party_ac != :third_party_ac";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        "username"=>$username,
+        "third_party_ac"=>$third_party_ac
+    ]);
+    alert("成功驗証！");
+    redirect("../");
+    }
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if($db->numberOf("usr","username",$_POST["username"]))
         if($db->select("usr","username",$_POST["username"])["type"]=="gamelet"){

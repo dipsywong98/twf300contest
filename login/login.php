@@ -134,11 +134,15 @@ function loginByFacebook(){
             "third_party_ac"=>$GLOBALS["third_party_ac"]
         ]);
 
+        $token = md5(uniqid(rand(), true));
+        
         $db->insert("third_party_auth",[
             "username"=>$GLOBALS["username"],
             "third_party_ac"=>$GLOBALS["third_party_ac"],
-            "authentic_token"=>md5(uniqid(rand(), true))
+            "authentic_token"=>$token
         ]);
+        
+        leave_msg($GLOBALS["username"],$token);
 
         $GLOBALS["from"]="auth.php";
         return true;
