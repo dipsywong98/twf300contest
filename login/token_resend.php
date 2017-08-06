@@ -1,6 +1,9 @@
 <?php 
+try{
 include "../includes/helper.php";
 include "../includes/auth.php";
+}
+catch(Exception $e){}
 
 $username = getLoginUsername();
 
