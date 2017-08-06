@@ -37,14 +37,14 @@
             <br><br>
             
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="input_un" name="username">
-    <label class="mdl-textfield__label" for="input_un">gamelet id</label>
-  </div>
-         <br>   
-<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="rg">
-    <input class="mdl-textfield__input" type="text" id="input_pw" name="username">
-    <label class="mdl-textfield__label" for="input_pw">gamelet password</label>
-  </div>
+                <input class="mdl-textfield__input" type="text" id="input_un" name="username">
+                <label class="mdl-textfield__label" for="input_un">gamelet id</label>
+              </div>
+                     <br>   
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="rg">
+                <input class="mdl-textfield__input" type="password" id="input_pw" name="password">
+                <label class="mdl-textfield__label" for="input_pw">gamelet password</label>
+              </div>
             <br>
             <input type="hidden" name="from" value="<?php echo $from;?>">
             <input type="hidden" name="third_party_ac" value="<?php if(isset($third_part_ac))echo $third_party_ac;?>">

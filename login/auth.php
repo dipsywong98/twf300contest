@@ -151,19 +151,39 @@ function test_input($data) {
         time_min = <?php echo $time_min;?>;
         count();
     </script>
+    <style>
+    .section{
+  position: absolute;
+        top:20%;
+  width: 100%;
+  text-align: center;
+        }
+        .section-text{
+            max-width: 800px;
+              margin-left: 25%;
+              padding: 24px;
+              text-align: left;
+        }
+    </style>
 </head>
 <body>
      <?php require "../nav_bar.php";?>
         <main>
+            <div class="section">
+                <div class="section-text mdl-shadow--8dp">
     <h2>你尚未綁定</h2>
     
     <p>嘎姆帳號：</p>
     <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-        <input type="text" name="username" value="<?php echo $username;?>"><input type="submit" name="submit" value="修改">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="input_un" name="username" value="<?php echo $username;?>">
+                <label class="mdl-textfield__label" for="input_un">gamelet id</label>
+              </div><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="submit" value="修改">
     </form>
             請到<a href="http://tw.gamelet.com/user.do?username=<?php echo $username;?>">你的嘎姆個人網頁</a>點擊驗証網址完成驗証
             <p id="text"></p>
-            
+                </div>
+            </div>
     </main>
 </body>
 </html>
