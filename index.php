@@ -4,29 +4,32 @@ require "includes/helper.php";
 
 <html>
 <head>
+    <script src="js/jquery-3.2.1.min.js"></script>
 <title>首頁 - 300容量挑戰賽</title> 
     <style>
 .demo-layout-transparent {
-  background: url('../assets/demos/transparent.jpg') center / cover;
+  background: url("Cover.jpg") center / cover;
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
-  /* This background is dark, so we set text to white. Use 87% black instead if
-     your background is light. */
   color: white;
 }
 </style>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <?php require "nav_bar.php";?>
-        <main>
-    這是首頁
-    <?php 
-    
-    echo isLogin();
-    ?>
-    <p><a href="login/"> 登入 </a>|<a href="submit/"> 遞交 </a>|<a href="publish/"> 公開 </a>|<a href="vote/"> 評分 </a>|<a href="profile/"> 我的作品 | 我的評賞 </a>|<a href="control_panel.php"> 控制台 </a>|<a href="logout.php"> 登出 </a></p>
-    </main></div>
+    <?php require "nav_bar.php";?>
+    <main>
+        
+      <img src="Cover.jpg" style="width:100%;height:90%;background-color:#009688">
+        
+<!--
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="left:10%; top:90%; position: absolute">
+  了解詳情
+</a>
+-->
+            
+    </main>
+    </div>
 </body>
 </html>
