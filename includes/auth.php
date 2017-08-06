@@ -1,5 +1,4 @@
 <?php 
-$root = "http://localhost/contest/";
 
 class GameletLoginVerification {
 	

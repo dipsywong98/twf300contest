@@ -40,9 +40,9 @@ function print_nav_list(){
     <div class="mdl-layout__header-row">
       <a class="mdl-layout-title mdl-navigation__link" href="<?php echo getRoot();?>index.php">300容量挑戰賽</a>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      <div class="mdl-navigation mdl-layout--large-screen-only">
         <?php print_nav_list()?>
-      </nav>
+      </div>
     </div>
 
 </header>
