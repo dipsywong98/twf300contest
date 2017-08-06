@@ -56,11 +56,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         "username"=>$username,
         "third_party_ac"=>$third_party_ac
     ]);
-        
-    setcookie("third",encrypt_decrypt("encrypt",$GLOBALS["third_party_ac"],$username),-1,"/");
-    setcookie('login', null, -1, '/');
-    setcookie("ehash",encrypt_decrypt("encrypt",$hash,$username),-1,"/");
-    setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
+     
+    $_SESSION["usr"] = $username;
+//    setcookie("third",encrypt_decrypt("encrypt",$GLOBALS["third_party_ac"],$username),-1,"/");
+//    setcookie('login', null, -1, '/');
+//    setcookie("ehash",encrypt_decrypt("encrypt",$hash,$username),-1,"/");
+//    setcookie("usr",encrypt_decrypt("encrypt",$username,"fk is fucking handsome"),-1,"/");
     
     $user = $db->selectParams("third_party_auth",[
     "username"=>$username,
@@ -86,6 +87,7 @@ $user = $user[0];
 $username = $user["username"];
 $third_party_ac = $user["third_party_ac"];
 $token = $user["authentic_token"];
+$time_min = $user["resend_time"];
 
 
 if(isset($_GET["token"])){
@@ -105,29 +107,9 @@ if(isset($_GET["token"])){
             "third_party_ac"=>$third_party_ac
         ]);
         alert("成功驗証！");
-//        redirect("../");
+        redirect("../");
         
     }
-}
-
-//if the user have post the token in twf300_2017 profile page
-if(tokenExist($username,$token)){
-    $sql = "UPDATE `third_party_auth` SET authentic_token = 'success' WHERE username = :username AND third_party_ac = :third_party_ac";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([
-        "username"=>$username,
-        "third_party_ac"=>$third_party_ac
-    ]);
-    
-    //把冒充者刪去
-    $sql = "DELETE FROM `third_party_auth` WHERE username = :username AND third_party_ac != :third_party_ac";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([
-        "username"=>$username,
-        "third_party_ac"=>$third_party_ac
-    ]);
-    alert("成功驗証！");
-    redirect("../");
 }
 
 function test_input($data) {
@@ -137,46 +119,6 @@ function test_input($data) {
   return $data;
 }
 
-function tokenExist($by, $tk){
-//    echo $by." ".$tk."<br>";
-    $url = 'http://tw.gamelet.com/user.do?username=twf300_2017';
-    $index=0;
-    $username="";
-    $token="";
-    $content = file($url);
-    foreach ($content as $k=>$r){
-        if(str_contain($r,'<div id="userComment')&&!str_contain($r,'<div id="userComments')&&!str_contain($content[$k+2],'悄悄話')){
-            //start of comment
-            //index + 2 會找到個資連結
-            $username = explode('" title=',explode('?username=',$content[$k+2])[1])[0];
-            $username = str_replace("%40","@",$username);
-            echo "<br><br>".$username . " (".$k."<br>";
-
-            $index=$k;
-
-        }
-        if(str_contain($r,'<div class="pContent"><span style="')&&str_contain($r,'</span></div>')){
-            if($k<$index+9)
-                $token = explode("</",explode(">",explode("><",$r)[1])[1])[0];
-        }
-        elseif(str_contain($r,'<div class="pContent">')&&str_contain($r,'</div>')){
-            if($k<$index+9)
-                $token = explode("<",explode('>',$r)[1])[0];
-        }
-//        echo $username." ".$token."<br>";
-        if($by==$username && $token==$tk){
-            return true;
-        }
-
-    }
-    return false;
-}
-//function str_contain($str1,$str2){
-//    if (strpos($str1, $str2) !== false) {
-//        return true;
-//    }
-//    return false;
-//}
 
 ?>
 
@@ -184,16 +126,44 @@ function tokenExist($by, $tk){
 <head>
 <title>綁定嘎姆 - 300容量挑戰賽</title>    
 <script src="../js/jquery-3.2.1.min.js"></script>
+    <script>
+        function showBtn(){
+    
+    btn = document.createElement("a");
+    btn.href = "token_resend.php";
+    btn.value="重新發送";
+    btn.textContent="重新發送";
+    document.getElementById("text").appendChild(btn);
+}
+        function now(){return Math.floor(Date.now() / 1000);}
+    function count(){
+    window.setTimeout(function(){
+        $("#text")[0].textContent = (time_min-now())+"秒後可以重新發送";
+        if(time_min-now()>0){
+            count();
+        }else{
+            $("#text")[0].textContent = "";
+            showBtn();
+        }
+       },1000);
+}
+        start_time = <?php echo time();?>;
+        time_min = <?php echo $time_min;?>;
+        count();
+    </script>
 </head>
 <body>
+     <?php require "../nav_bar.php";?>
+        <main>
     <h2>你尚未綁定</h2>
     
     <p>嘎姆帳號：</p>
     <form method="post" enctype="multipart/form-data" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
         <input type="text" name="username" value="<?php echo $username;?>"><input type="submit" name="submit" value="修改">
     </form>
-    <p>第三方帳號：<?php echo $third_party_ac;?></p>
-    <p>驗証碼：<?php echo $token;?></p>
-    <p>用你的嘎姆帳號將驗証碼<strong>公開留言</strong>至<a href="http://tw.gamelet.com/user.do?username=twf300_2017">「300容量挑戰賽作品」</a><br>留言後請重新來到本頁，本頁將會自動驗証</p>
+            請到<a href="http://tw.gamelet.com/user.do?username=<?php echo $username;?>">你的嘎姆個人網頁</a>點擊驗証網址完成驗証
+            <p id="text"></p>
+            
+    </main>
 </body>
 </html>

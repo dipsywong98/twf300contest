@@ -139,10 +139,11 @@ function loginByFacebook(){
         $db->insert("third_party_auth",[
             "username"=>$GLOBALS["username"],
             "third_party_ac"=>$GLOBALS["third_party_ac"],
-            "authentic_token"=>$token
+            "authentic_token"=>$token,
+            "resend_time"=>time()-10
         ]);
         
-        leave_msg($GLOBALS["username"],$token);
+        require "token_resend.php";
 
         $GLOBALS["from"]="auth.php";
         return true;

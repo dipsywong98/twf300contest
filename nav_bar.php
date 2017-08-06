@@ -8,7 +8,8 @@ function print_nav_list(){
         echo '<a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'login">登入</a>';
     }
     else{
-      echo '
+        if(isThirdAuth()){
+            echo '
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'vote">評分</a>
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'submit">投稿</a>
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'profile">個人檔案</a>';
@@ -18,6 +19,11 @@ function print_nav_list(){
             <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'control_panel.php">控制台</a>
             ';
         }
+        }
+        else{
+            echo '<a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'login/auth.php">驗証</a>';
+        }
+      
     echo '<a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'logout.php">登出</a>';
 
     }
