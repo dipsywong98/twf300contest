@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "mark_tech"=>$_POST["mark_tech"],
         "mark_story"=>$_POST["mark_story"],
         "mark_creative"=>$_POST["mark_creative"],
-        "comment"=>$_POST["comment"]
+        "comment"=>$_POST["comment"],
+        "admin"=>isAdmin()
     ]);
     
     alert("成功遞交");

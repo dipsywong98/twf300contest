@@ -87,8 +87,8 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
     </div>
             </div>
             <div class="mdl-tabs__panel" id="tab2-panel">
-                <div class="section mdl-shadow--8dp">
-               <div class="section-text" id="xd">
+                <div class="section">
+               <div class="section-text mdl-shadow--8dp" id="xd">
         <script>
             newVoteTable($("#xd")[0], votes, missions)
 
