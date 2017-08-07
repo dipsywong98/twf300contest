@@ -48,6 +48,16 @@ $votes = $db->all("votes");
     text-shadow: 1px 1px 3px #000000;
 }
     body    {overflow-x:scroll;}
+    .section{
+    position: absolute;
+        top:20%;
+  width: 100%;
+  text-align: center;
+        }
+        .section-text{
+            display: inline-block;
+              text-align: left;
+        }
 </style>
     <script>
     <?php
@@ -105,13 +115,23 @@ $votes = $db->all("votes");
                <a href="#vote-panel" class="mdl-tabs__tab">投票</a>
             </div>
             <div class="mdl-tabs__panel is-active" id="submits-panel">
-               <script>newTable($("#submits-panel")[0],submits,"submits")</script>
+                <div class="section">
+                
+                <div class="section-text" id="d1"></div>
+                </div>
+               <script>newTable($("#d1")[0],submits,"submits")</script>
             </div>
-            <div class="mdl-tabs__panel" id="usr-panel">
-               <script>newTable($("#usr-panel")[0],users)</script>
+            <div class="mdl-tabs__panel " id="usr-panel">
+                <div class="section">
+                <div class="section-text" id="d2"></div>
+                </div>
+               <script>newTable($("#d2")[0],users)</script>
             </div>
             <div class="mdl-tabs__panel" id="vote-panel">
-               <script>newTable($("#vote-panel")[0],votes,"votes")</script>
+                <div class="section">
+                <div class="section-text" id="d3"></div>
+                </div>
+               <script>newTable($("#d3")[0],votes,"votes")</script>
             </div>
          </div>
 	  </main>
