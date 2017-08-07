@@ -99,13 +99,13 @@ $votes = $db->all("votes");
                <a href="#vote-panel" class="mdl-tabs__tab">投票</a>
             </div>
             <div class="mdl-tabs__panel is-active" id="submits-panel">
-               <script>newTable($("#submits-panel")[0],submits)</script>
+               <script>newTable($("#submits-panel")[0],submits,"submits")</script>
             </div>
             <div class="mdl-tabs__panel" id="usr-panel">
                <script>newTable($("#usr-panel")[0],users)</script>
             </div>
             <div class="mdl-tabs__panel" id="vote-panel">
-               <script>newTable($("#vote-panel")[0],votes)</script>
+               <script>newTable($("#vote-panel")[0],votes,"votes")</script>
             </div>
          </div>
 	  </main>

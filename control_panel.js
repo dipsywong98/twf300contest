@@ -161,7 +161,7 @@ function newUserTable(parent) {
     return table;
 }
 
-function newTable(parent,listArray){
+function newTable(parent,listArray,type){
      //search bar
     var form = newElement(parent,"form","");
     form.setAttribute("action","#");
@@ -180,24 +180,62 @@ function newTable(parent,listArray){
     var thead = newElement(table, "thead", "");
     var tr = newElement(thead, "tr", "");
     target=listArray[0];
+    var x = 0;
     for (var k in target){
         if(Number.isInteger(Number(k)))continue;
+        if(x==1&&type=="submits"){
+            newTh(tr, "th", "sort", "mark_avg").setAttribute("data-sort", "mark_avg");
+        }
+        if(x==3&&type=="votes"){
+            newTh(tr, "th", "sort", "mark_avg").setAttribute("data-sort", "mark_avg");
+        }
         if (target.hasOwnProperty(k)) {
              newTh(tr, "th", "sort", k).setAttribute("data-sort", k);
             tag.push(k);
         }
+        x++;
     }
     
     var tbody = newElement(table, "tbody", "list");
     for (var i=0; i<listArray.length; i++){
         tr = newElement(tbody, "tr", "");
         target=listArray[i];
+        x=0;
         for (var k in target){
             if(Number.isInteger(Number(k)))continue;
+            if(x==1&&type=="submits"){
+                var filtered = votes.filter(function(vote) { 
+                    return vote.hash == target.hash; 
+                });
+                var sum_mark=0;
+                for (var j=0;j<filtered.length;j++){
+                    var avg_mark = 0;
+                    for (var l = 0; l < scheme.length; l++) {
+                        var mark = votes[j]["mark_" + scheme[l].name];
+                        avg_mark += mark;
+                    }
+                    sum_mark+=avg_mark/scheme.length;
+                }
+                newTh(tr, "th", "mark_avg",sum_mark/filtered.length);
+            }
+            if(x==3&&type=="votes"){
+                var avg_mark = 0;
+                for (var l = 0; l < scheme.length; l++) {
+                    var mark = votes[i]["mark_" + scheme[l].name];
+                    avg_mark += mark/scheme.length;
+                }
+                newTh(tr, "th", "mark_avg",avg_mark);
+                
+            }
             if (target.hasOwnProperty(k)) {
                  newTh(tr, "td", k, target[k]);
             }
+                x++;
         }
+    }
+    
+    if(type=="submits"||type=="votes"){
+        tag.push("mark_avg");
     }
     
     var options = {valueNames: tag},
