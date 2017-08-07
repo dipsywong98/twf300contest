@@ -48,8 +48,8 @@ function print_nav_list(){
 </header>
 <div class="mdl-layout__drawer mdl-layout--small-screen-only">
     <span class="mdl-layout-title">300容量挑戰賽</span>
-    <nav class="mdl-navigation">
+    <div class="mdl-navigation">
       <?php print_nav_list()?>
-    </nav>
+    </div>
 </div>
 

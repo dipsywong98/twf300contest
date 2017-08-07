@@ -135,7 +135,7 @@ function newTable(parent,listArray,type){
                     }
                     sum_mark+=avg_mark/scheme.length;
                 }
-                newTh(tr, "th", "mark_avg",sum_mark/filtered.length);
+                newTh(tr, "th", "mark_avg",String(sum_mark/filtered.length).substr(0,4));
             }
             if(x==3&&type=="votes"){
                 var avg_mark = 0;
@@ -143,11 +143,30 @@ function newTable(parent,listArray,type){
                     var mark = votes[i]["mark_" + scheme[l].name];
                     avg_mark += mark/scheme.length;
                 }
-                newTh(tr, "th", "mark_avg",avg_mark);
+                newTh(tr, "th", "mark_avg",String(avg_mark).substr(0,4));
                 
             }
             if (target.hasOwnProperty(k)) {
-                 newTh(tr, "td", k, contentfilter(k,target[k]));
+                if(k.includes("comment")){
+                    
+                    var btn = newTh(tr,"button","mdl-button mdl-js-button mdl-js-ripple-effect "+k,"view");
+                    newTh(btn, "p", k, contentfilter(k,target[k])).style.display="none";
+                    btn.addEventListener("click",function(){
+                        dialog = document.querySelector('dialog');
+                        if (! dialog.showModal) {
+                          dialogPolyfill.registerDialog(dialog);
+                        }
+                        dialog.showModal();
+                       $("#dialog-content")[0].innerHTML=this.childNodes[1].innerHTML; dialog.querySelector('.close').addEventListener('click', function() {
+                          dialog.close();
+                        });
+                    })
+                    
+                }
+                else{
+                    newTh(tr, "td", k, contentfilter(k,target[k]));
+                }
+                 
             }
                 x++;
         }

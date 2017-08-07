@@ -27,6 +27,8 @@ $votes = $db->all("votes");
     <script src="js/scheme.js"></script>
     <script src="js/list.min.js"></script>
     <script src="js/sortable.min.js"></script>
+    <script src="js/dialog-polyfill.js"></script>
+    <link rel="stylesheet" href="css/dialog-polyfill.css" />
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
       <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -92,6 +94,10 @@ $votes = $db->all("votes");
         <?php require "nav_bar.php";?>
         
       <main class="mdl-layout__content">    
+          <dialog class="mdl-dialog">
+              <p id="dialog-content" style="word-wrap:break-word;"></p>
+      <button type="button" class="mdl-button close">關閉</button>
+  </dialog>
          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">
                <a href="#submits-panel" class="mdl-tabs__tab is-active">作品</a>
