@@ -20,6 +20,10 @@ function contentfilter(key,value){
     if(key=="hash"||key=="voter_hash"){
         return value.substr(0,6);
     }
+    if(key.includes("time")){
+        if(value<1000) return "N/A";
+       return format(value);
+       }
     return value;
 }
 
@@ -209,10 +213,10 @@ function newTable(parent,listArray,type){
     for (var k in target){
         if(Number.isInteger(Number(k)))continue;
         if(x==1&&type=="submits"){
-            newTh(tr, "th", "sort", "mark_avg").setAttribute("data-sort", "mark_avg");
+            newTh(tr, "th", "sort", "平均分").setAttribute("data-sort", "mark_avg");
         }
         if(x==3&&type=="votes"){
-            newTh(tr, "th", "sort", "mark_avg").setAttribute("data-sort", "mark_avg");
+            newTh(tr, "th", "sort", "平均分").setAttribute("data-sort", "mark_avg");
         }
         if (target.hasOwnProperty(k)) {
              newTh(tr, "th", "sort", keyfilter(k)).setAttribute("data-sort", k);
