@@ -55,6 +55,7 @@ $votes = $db->all("votes");
   text-align: center;
         }
         .section-text{
+            padding:25px;
             display: inline-block;
               text-align: left;
         }
@@ -117,19 +118,19 @@ $votes = $db->all("votes");
             <div class="mdl-tabs__panel is-active" id="submits-panel">
                 <div class="section">
                 
-                <div class="section-text" id="d1"></div>
+                <div class="section-text mdl-shadow--8dp" id="d1"></div>
                 </div>
                <script>newTable($("#d1")[0],submits,"submits")</script>
             </div>
             <div class="mdl-tabs__panel " id="usr-panel">
                 <div class="section">
-                <div class="section-text" id="d2"></div>
+                <div class="section-text mdl-shadow--8dp" id="d2"></div>
                 </div>
                <script>newTable($("#d2")[0],users)</script>
             </div>
             <div class="mdl-tabs__panel" id="vote-panel">
                 <div class="section">
-                <div class="section-text" id="d3"></div>
+                <div class="section-text mdl-shadow--8dp" id="d3"></div>
                 </div>
                <script>newTable($("#d3")[0],votes,"votes")</script>
             </div>

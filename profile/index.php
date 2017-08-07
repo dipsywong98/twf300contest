@@ -47,22 +47,28 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
     ?>
 
         </script>
-<!--
 <style>
         
-        .center-items {
-          justify-content: center;
+        .section{
+            position: absolute;
+        top:20%;
+            width:100%;
+  text-align: center;
+        }
+        .section-text{
+            display: inline-block;
+              text-align: left;
+            padding:25px;
         }
     
     </style>
--->
     </head>
         
         
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
-    <main class="mdl-layout__content">    
+    <main class="mdl-layout__content"> 
         <div style="align:center;">
          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">
@@ -70,23 +76,29 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
                <a href="#tab2-panel" class="mdl-tabs__tab">我的投票</a>
             </div>
             <div class="mdl-tabs__panel is-active" id="tab1-panel">
-               <div id="lol">
+               <div class="section">
+        <div class="section-text mdl-shadow--8dp" id="lol">
         <script>
             newVoteTable($("#lol")[0], recieves, "")
 
         </script>
+                   </div>
+                
     </div>
             </div>
             <div class="mdl-tabs__panel" id="tab2-panel">
-               <div id="xd">
+                <div class="section mdl-shadow--8dp">
+               <div class="section-text" id="xd">
         <script>
             newVoteTable($("#xd")[0], votes, missions)
 
         </script>
-    </div>
+    </div></div>
             </div>
          </div>  
         </div>
+            
+            
 	  </main>  
         </div>
     </body>
