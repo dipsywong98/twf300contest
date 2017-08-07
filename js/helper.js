@@ -85,7 +85,7 @@ function newVoteTable(parent, votes, missions) {
     for (var j = 0; j < votes.length; j++) {
         tr = newElement(tbody, "tr", "");
         if (missions != "") newTh(tr, "td", "twf_name", missions[j]["twf_name"]);
-        newTh(tr, "td", "vote_time", votes[j]["vote_time"]);
+        newTh(tr, "td", "vote_time", votes[j]["vote_time"]).textContent=format(votes[j]["vote_time"]);
         var avg_mark = 0;
         var avg_td = newElement(tr, "td", "mark_avg");
         for (var i = 0; i < scheme.length; i++) {
