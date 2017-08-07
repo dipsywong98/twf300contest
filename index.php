@@ -190,11 +190,26 @@ require "includes/helper.php";
             
 </div>
                
+                <!-- Forth Section -->
+                
+        <div class="section" style="position:relative; width:100%;height:auto;
+  background-color: #37474f;color:#FFFFFF">
+        
+            <div class="section-text"><h2>Facebook登入教學</h2>
+        <ol>
+          <li><b>把你的留言板設為"公開"</b></li>
+          <li>在本網站的右上角按"登入"</li>
+          <li>選擇Facebook的登入方法</li>
+          <img src=https://drive.google.com/uc?export=download&id=0BycLgkiHx_3YbjBLM0tIak13aWs>
+          <li>之後系統會發一個驗證信息到你的留言板</li>
+          <img src=https://drive.google.com/uc?export=download&id=0BycLgkiHx_3YbU9faFYwNGI0ZlE>
+          <li>請點擊留言中的驗證連結</li>
+          <li>完成！之後就可以點右上角的"投稿"來交檔囉！</li>
+        </ol>
         </div>
-        
-        <!-- Forth section -->
-        
-    </main>
+        </div>
+        </div>
+        </main>
     </div>
 </body>
 </html>
