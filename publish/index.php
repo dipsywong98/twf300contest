@@ -1,3 +1,4 @@
+ <?php require 'publish.php'; ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,7 +10,6 @@
 </head>
 
 <body>
-    <?php require 'publish.php'; ?>
 
     <script>
     function download(url){
