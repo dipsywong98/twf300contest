@@ -3,6 +3,7 @@ var file;
 onload=function(){
     $("#twf_photo").on("change",function(){
 //        $("#photo_preview")[0].src = $("#twf_photo")[0].value;
+        document.getElementById("twf_uploadPhoto").value = this.files[0].name;
         
         if ($("#twf_photo")[0].files && $("#twf_photo")[0].files[0]) {
                 var reader = new FileReader();

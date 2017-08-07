@@ -13,9 +13,13 @@
   text-align: center;
         }
         .section-text{
+            display: inline-block;
             max-width: 800px;
               margin-left: 25%;
-              padding: 24px;
+            margin-right: 25%;
+              padding-left: 24px;
+            padding-bottom: 24px;
+            padding-right: 24px;
               text-align: left;
         }
     </style>
