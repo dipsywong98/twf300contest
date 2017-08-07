@@ -5,7 +5,25 @@
     <title>公開作品 - 300容量挑戰賽</title>
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/fbservice.js"></script>
-    
+    <style>
+        .section{
+            position: absolute;
+        top:20%;
+  width: 100%;
+  text-align: center;
+        }
+        .section-text{
+            display: inline-block;
+            max-width: 800px;
+            margin-bottom: 100px;
+              margin-left: 25%;
+            margin-right: 25%;
+              padding-left: 24px;
+            padding-bottom: 24px;
+            padding-right: 24px;
+              text-align: left;
+        }
+    </style>
     
 </head>
 
@@ -22,6 +40,9 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
         <main>
+            <div class="section">
+            <div class="section-text mdl-shadow--8dp">
+                
     <h2>公開作品</h2>
         
     <img width="300px" src="../uploads/<?php echo $hash."/".$hash.".".$photo_type;?>"/>
@@ -60,6 +81,9 @@
         
         <input type="submit" name="submit" value="Submit">
     </form>
+                </div>
+            </div>
         </main>
+    </div>
 </body>
 </html>
