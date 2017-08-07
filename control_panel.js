@@ -1,3 +1,28 @@
+//var key_dictionary=[
+//    "hash":"代碼",
+//    "mark_avg":"平均分",
+//    "twf_name":"",
+//    "ip":"",
+//    ""
+//]
+function keyfilter(key){
+    if(key.includes("mark_")) {
+        var t =  scheme.filter(function(s){
+            return s.name==key.substr(5);
+        });
+        console.log(t);
+        return t[0].text;
+        }
+    return key;
+}
+
+function contentfilter(key,value){
+    if(key=="hash"||key=="voter_hash"){
+        return value.substr(0,6);
+    }
+    return value;
+}
+
 function format(timestamp) {
     console.log(timestamp);
     var date = new Date(timestamp * 1000);
@@ -190,7 +215,7 @@ function newTable(parent,listArray,type){
             newTh(tr, "th", "sort", "mark_avg").setAttribute("data-sort", "mark_avg");
         }
         if (target.hasOwnProperty(k)) {
-             newTh(tr, "th", "sort", k).setAttribute("data-sort", k);
+             newTh(tr, "th", "sort", keyfilter(k)).setAttribute("data-sort", k);
             tag.push(k);
         }
         x++;
@@ -228,7 +253,7 @@ function newTable(parent,listArray,type){
                 
             }
             if (target.hasOwnProperty(k)) {
-                 newTh(tr, "td", k, target[k]);
+                 newTh(tr, "td", k, contentfilter(k,target[k]));
             }
                 x++;
         }
