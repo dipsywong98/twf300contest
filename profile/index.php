@@ -14,6 +14,7 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
     $recieves = $db->selectAll("votes","hash",getLoginUserHash());
 //    print_r($recieves);
 }
+$_hash = getLoginUserHash();
 
 ?>
 
@@ -46,6 +47,12 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
     
     ?>
 
+            function download(){
+                var link = document.createElement("a");
+    link.download = name;
+    link.href = '../uploads/<?php echo $_hash;?>/<?php echo $_hash;?>.twf';
+    link.click();
+            }
         </script>
 <style>
         
@@ -78,7 +85,12 @@ if($db->numberOf("submits","hash",getLoginUserHash())){
             <div class="mdl-tabs__panel is-active" id="tab1-panel">
                <div class="section">
         <div class="section-text mdl-shadow--8dp" id="lol">
+            <h2><?php echo $submit["twf_name"];?></h2>
+            <img width="300px" src="../uploads/<?php echo $_hash;?>/<?php echo $_hash;?>.<?php echo $submit["photo_type"];?>"/>
+            <p>最短遊玩時間：<?php echo $submit["time_min"];?></p>
+            <button onclick="download()" class="mdl-button mdl-button-colored mdl-js-button mdl-button--raised mdl-js-ripple-effect">下載已遞交的TWF檔</button>
         <script>
+            
             newVoteTable($("#lol")[0], recieves, "")
 
         </script>
