@@ -1,4 +1,5 @@
- <?php require 'publish.php'; ?>
+<?php require "../includes/helper.php";?>
+<?php require 'publish.php'; ?>
 <!DOCTYPE HTML>
 <html>
 <head>

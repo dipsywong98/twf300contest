@@ -1,7 +1,5 @@
 <?php
 
-require "../includes/helper.php";
-
 //echo time();
 
 if(!isLogin())
