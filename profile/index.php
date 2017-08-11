@@ -32,6 +32,7 @@ $_hash = getLoginUserHash();
         <script src="../js/sortable.min.js"></script>
         <script src="../js/helper.js"></script>
         <script src="../js/scheme.js"></script>
+        <script src="../js/browser.js"></script>
         <script>
             <?php
         
@@ -47,12 +48,7 @@ $_hash = getLoginUserHash();
     
     ?>
 
-            function download(){
-                var link = document.createElement("a");
-    link.download = name;
-    link.href = '../uploads/<?php echo $_hash;?>/<?php echo $_hash;?>.twf';
-    link.click();
-            }
+            
         </script>
 <style>
         
@@ -73,6 +69,23 @@ $_hash = getLoginUserHash();
         
         
     <body>
+        <iframe id="my_iframe" style="display:none;"></iframe>
+<script>
+function Download() {
+    var url = '../uploads/<?php echo $_hash;?>/<?php echo $_hash;?>.twf';
+    if(isIE){
+        window.alert("不支援IE，請下載Chrome或Firefox");
+    }
+    if(isChrome==false){
+        document.getElementById('my_iframe').src = url;    
+    }
+    
+    var link = document.createElement('a');
+        link.href = url;
+    link.setAttribute('download','<?php echo $_hash?>.'+url.split(".")[3]);
+    link.click();
+};
+</script>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
     <main class="mdl-layout__content"> 
@@ -88,7 +101,7 @@ $_hash = getLoginUserHash();
             <h2><?php echo $submit["twf_name"];?></h2>
             <img width="300px" src="../uploads/<?php echo $_hash;?>/<?php echo $_hash;?>.<?php echo $submit["photo_type"];?>"/>
             <p>最短遊玩時間：<?php echo $submit["time_min"];?></p>
-            <button onclick="download()" class="mdl-button mdl-button-colored mdl-js-button mdl-button--raised mdl-js-ripple-effect">下載已遞交的TWF檔</button>
+            <button onclick="Download()" class="mdl-button mdl-button-colored mdl-js-button mdl-button--raised mdl-js-ripple-effect">下載已遞交的TWF檔</button>
         <script>
             
             newVoteTable($("#lol")[0], recieves, "")

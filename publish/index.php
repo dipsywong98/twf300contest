@@ -28,13 +28,20 @@
 </head>
 
 <body>
-
+    <iframe id="my_iframe" style="display:none;"></iframe>
     <script>
     function download(url){
-        var link = document.createElement('a');
+    if(isIE){
+        window.alert("不支援IE，請下載Chrome或Firefox");
+    }
+    if(isChrome==false){
+        document.getElementById('my_iframe').src = url;    
+    }
+    
+    var link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download','<?php echo $hash?>.'+url.split(".")[3]);
-        link.click();
+    link.setAttribute('download','<?php echo $hash?>.'+url.split(".")[3]);
+    link.click();
     }
     </script>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
