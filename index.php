@@ -48,7 +48,7 @@ require "includes/helper.php";
     <main>
         
         <!-- first section -->
-      <img src="Cover.jpg" style="width:100%;height:90%;background-color:#009688">
+      <img src="Cover.jpg" style="width:100%;height:auto;background-color:#009688">
         
 <!--
         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="left:10%; top:90%; position: absolute">
