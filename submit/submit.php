@@ -59,7 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else if(!in_array(pathinfo($_FILES['twf_file']['name'], PATHINFO_EXTENSION),$allowed)) $error.="請確保你於「作品twf檔」欄上載的是twf檔<br>";
         else if($tmp_twf_file["error"]!=0) $error.="twf作品上載時發生錯誤，代碼:".$tmp_twf_file["error"]."<br>";
     }else{
-        $no_new_twf_file = true;
+//        $no_new_twf_file = true;
+        $tmp_twf_file = $_FILES["twf_file"];
+        if($tmp_twf_file["error"]==4){$no_new_twf_file = true;}
     }
     
     $tmp_twf_file = $_FILES["twf_photo"];
@@ -81,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $upload_success = save($hash);
         if(!$no_new_photo) $photo_type = $upload_success;
-        if($no_new_photo)$upload_success = $photo_type;
+        if($no_new_photo) $upload_success = $photo_type;
         if($upload_success){
             if($db->numberOf("submits","hash",$hash)==0){
                 $db->insert("submits",[
@@ -135,7 +137,7 @@ function save($hash){
     $target_dir .= "/";
     
     //twf file
-    if($GLOBALS["new_submit"]){
+    if(!$GLOBALS["no_new_twf_file"]){
     $target_file = $target_dir . basename($hash.".twf");
     move_uploaded_file($_FILES["twf_file"]["tmp_name"],$target_file);
 //    echo $_FILES[$upload_tag]["error"];
