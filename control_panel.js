@@ -6,6 +6,30 @@
 //    ""
 
 //]
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+} 
+
 function keyfilter(key){
     if(key.includes("mark_")) {
         var t =  scheme.filter(function(s){
@@ -21,7 +45,7 @@ function contentfilter(key,value){
     if(key=="hash"||key=="voter_hash"){
         return value.substr(0,6);
     }
-    if(key.includes("time")){
+    if(key.includes("time")&&!key.includes("min")){
         if(value<1000) return "N/A";
        return format(value);
        }
@@ -119,6 +143,13 @@ function newTable(parent,listArray,type){
     for (var i=0; i<listArray.length; i++){
         tr = newElement(tbody, "tr", "");
         target=listArray[i];
+        if(type=="submits"){
+            tr.hash = target["hash"];
+            tr.addEventListener("click",function(e){
+                console.log(target);
+                post("vote/vote.php",{"hash":this.hash});
+            });
+        }
         x=0;
         for (var k in target){
             if(Number.isInteger(Number(k)))continue;

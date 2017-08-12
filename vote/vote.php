@@ -21,6 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $photo_type = $submit["photo_type"];
     $twf_name = $submit["twf_name"];
     $mission_id = $submit["mission_id"];
+    
+    if($mission_id=="-1"){
+        redirect("../publish?hash=".$hash);
+    }
+    
     if(isset($submit["time_min"])){
         $time_min = $submit["time_min"];
     }

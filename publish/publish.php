@@ -12,6 +12,7 @@ else{
     }
 }
 
+/*
 if($db->numberOf("submits","mission_id","-1")==0){
     alert("no submition need publish now");
     redirect("../");
@@ -66,6 +67,15 @@ if($submit==""){
     alert("no submition need publish now");
     redirect("../");
 }
+*/
+
+if(isset($_GET["hash"])){
+    $hash = $_GET["hash"];
+    $submit = $db->select("submits","hash",$hash);
+}
+else{
+    $submit = $db->select("submits","mission_id","-1");
+}
 
 $twf_name = $submit["twf_name"];
 $hash = $submit["hash"];
@@ -74,11 +84,7 @@ $comment = $submit["comment"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    if($db->numberOf("publishing","pic",getLoginUsername())==0){
-        alert("代碼為".$_POST["hash"]."的作品已被公開");
-        redirect("");
-        die();
-    }
+    $hash = $_POST["hash"];
     
     if($_POST["mission_id"]==""){
         alert("請輸入任務代碼");
@@ -90,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         redirect("");
         die();
     }
-    if($_FILES["txt_file"]["error"]==4){
+    /*if($_FILES["txt_file"]["error"]==4){
         alert("請上載純文字檔");
         redirect("");
         die();
@@ -102,16 +108,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert("請確保你上載的是文字檔");
         redirect("");
         die();
-    }
+    }*/
     
-    move_uploaded_file($_FILES["txt_file"]["tmp_name"],"../uploads/".$hash."/".$hash.".txt");
+    /*move_uploaded_file($_FILES["txt_file"]["tmp_name"],"../uploads/".$hash."/".$hash.".txt");*/
     
     $mission_id = $_POST["mission_id"];
     $db->update("submits",$hash,[
         "mission_id"=>$mission_id,
         "publish_time"=>time()
     ]);
-    $db->delete("publishing",$hash);
+//    $db->delete("publishing",$hash);
     
     alert("success!");
     redirect("../");

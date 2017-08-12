@@ -94,7 +94,7 @@ session_start();
     }
 
     function isAdmin(){
-        $admin=["twf300_2017","a230459446","ericgau22","100002331046844%40facebook.com","100003919138920%40facebook.com","100000913023977%40facebook.com"];
+        $admin=["twf300_2017","a230459446","ericgau22","100002331046844@facebook.com","100003919138920@facebook.com","100000913023977@facebook.com"];
         return in_array(getLoginUsername(),$admin);
     }
 
@@ -108,10 +108,19 @@ session_start();
     }
 
     function redirect($url){
-        echo '
+        if(!str_contain($url,"?"))
+            echo '
+                <script>
+                    var para = document.createElement("a");
+                    para.href="'.$url.'?from='.getThisUrl().'";
+                    para.click();
+                </script>
+            ';
+        else
+            echo '
             <script>
                 var para = document.createElement("a");
-                para.href="'.$url.'?from='.getThisUrl().'";
+                para.href="'.$url.'&from='.getThisUrl().'";
                 para.click();
             </script>
         ';
