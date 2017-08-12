@@ -33,6 +33,8 @@ $_hash = getLoginUserHash();
         <script src="../js/helper.js"></script>
         <script src="../js/scheme.js"></script>
         <script src="../js/browser.js"></script>
+        <script src="../js/dialog-polyfill.js"></script>
+    <link rel="stylesheet" href="../css/dialog-polyfill.css" />
         <script>
             <?php
         
@@ -88,6 +90,10 @@ function Download() {
 </script>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
+            <dialog class="mdl-dialog">
+              <p id="dialog-content" style="word-wrap:break-word;"></p>
+      <button type="button" class="mdl-button close">關閉</button>
+  </dialog>
     <main class="mdl-layout__content"> 
         <div style="align:center;">
          <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">

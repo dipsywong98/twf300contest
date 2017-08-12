@@ -94,7 +94,18 @@ function newVoteTable(parent, votes, missions) {
             avg_mark += mark;
         }
         avg_td.textContent = avg_mark / scheme.length;
-        newTh(tr, "td", "comment", votes[j]["comment"]);
+        var btn = newTh(tr,"button","mdl-button mdl-js-button mdl-js-ripple-effect comment","view");
+        newTh(btn, "p", "comment", votes[j]["comment"]).style.display="none";
+        btn.addEventListener("click",function(){
+            dialog = document.querySelector('dialog');
+            if (! dialog.showModal) {
+              dialogPolyfill.registerDialog(dialog);
+            }
+            dialog.showModal();
+           $("#dialog-content")[0].innerHTML=this.childNodes[1].innerHTML; dialog.querySelector('.close').addEventListener('click', function() {
+              dialog.close();
+            });
+        })
     }
 
     if(missions!=""){
