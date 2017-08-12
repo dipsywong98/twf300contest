@@ -73,6 +73,27 @@ class DB{
 //        echo $sql;
     }
     
+    public function updateParams($table, $param, $data){
+        $sql = "UPDATE `".$table."` SET ";
+        
+        $i=0;
+        foreach($data as $key => $value){
+            if($i++!=0) $sql .= " , ";
+            $sql .= $key ." = :".$key;
+        }
+        $sql .= " WHERE ";
+        $i = 0;
+        foreach($param as $key => $value){
+            if($i++!=0) $sql .= " AND ";
+            $sql .= $key ." = :".$key;
+            $data[$key] = $value;
+        }
+//        echo $sql;
+        print_r($data);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($data);
+    }
+    
     //update row with corresponding has in table with data
     //data is an array such that [key1 => value1, key2 =>value2, etc]
     public function insert($table, $data){

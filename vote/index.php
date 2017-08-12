@@ -11,7 +11,8 @@ $voter_hash = getLoginUserHash();
 $submits = $conn->query("SELECT * FROM submits");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $db->insert("votes",[
+    if(count($db->selectParams("votes",["hash"=>$_POST["hash"],"voter_hash"=>$voter_hash]))==0){
+        $db->insert("votes",[
         "vote_time"=>time(),
         "hash"=>$_POST["hash"],
         "voter_hash"=>$voter_hash,
@@ -26,6 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "comment"=>$_POST["comment"],
         "admin"=>isAdmin()
     ]);
+    }
+    else{
+        $db->updateParams("votes",["hash"=>$_POST["hash"],"voter_hash"=>$voter_hash],[
+        "vote_time"=>time(),
+        "mark_experience"=>$_POST["mark_experience"],
+        "mark_balance"=>$_POST["mark_balance"],
+        "mark_art"=>$_POST["mark_art"],
+        "mark_content"=>$_POST["mark_content"],
+        "mark_tech"=>$_POST["mark_tech"],
+        "mark_story"=>$_POST["mark_story"],
+        "mark_creative"=>$_POST["mark_creative"],
+        "comment"=>$_POST["comment"]
+    ]);
+    }
+    
     
     alert("成功遞交");
 }
