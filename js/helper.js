@@ -2,6 +2,31 @@
 //$.getScript("scheme.min.js");
 //$.getScript("list.min.js);
 //Sortable.init();
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+} 
+
 function format(timestamp) {
     console.log(timestamp);
     var date = new Date(timestamp * 1000);
@@ -84,7 +109,13 @@ function newVoteTable(parent, votes, missions) {
     var tbody = newElement(table, "tbody", "list");
     for (var j = 0; j < votes.length; j++) {
         tr = newElement(tbody, "tr", "");
-        if (missions != "") newTh(tr, "td", "twf_name", missions[j]["twf_name"]);
+        if (missions != "") {
+            td = newTh(tr, "td", "twf_name", missions[j]["twf_name"]);
+            td.hash = missions[j]["hash"];
+            td.addEventListener("click",function(e){
+                post("../vote/vote.php",{"hash":this.hash});
+            });
+        }
         newTh(tr, "td", "vote_time", votes[j]["vote_time"]).textContent=format(votes[j]["vote_time"]);
         var avg_mark = 0;
         var avg_td = newElement(tr, "td", "mark_avg");
