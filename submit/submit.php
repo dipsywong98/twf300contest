@@ -1,5 +1,10 @@
 <?php
 require "../includes/helper.php";
+
+if(time()>1502812799){
+    alert("已經過了截稿時間");
+    redirect("../index.php")
+}
         
 // define variables and set to empty values
 $twf_name = $comment = $twf_doc = $twf_file = $twf_photo = $hash = "";

@@ -6,6 +6,15 @@ if(!isLogin()){
     redirect("../login");
 }
 
+if(time()<1503504000){
+    alert("投票尚未開始");
+    redirect("../index.php");
+}
+if(time(>1504799999)){
+    alert("投票已經結束");
+    redirect("../index.php");
+}
+
 $ip = get_client_ip();
 $voter_hash = getLoginUserHash();
 $submits = $conn->query("SELECT * FROM submits");
