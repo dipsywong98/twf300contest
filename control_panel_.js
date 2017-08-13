@@ -143,13 +143,6 @@ function newTable(parent,listArray,type){
     for (var i=0; i<listArray.length; i++){
         tr = newElement(tbody, "tr", "");
         target=listArray[i];
-        if(type=="submits"){
-            tr.hash = target["hash"];
-            tr.addEventListener("click",function(e){
-                console.log(target);
-                post("vote/vote.php",{"hash":this.hash});
-            });
-        }
         x=0;
         for (var k in target){
             if(Number.isInteger(Number(k)))continue;
@@ -195,7 +188,15 @@ function newTable(parent,listArray,type){
                     
                 }
                 else{
-                    newTh(tr, "td", k, contentfilter(k,target[k]));
+                    var td = newTh(tr, "td", k, contentfilter(k,target[k]));
+                    
+                    if(type=="submits"&&k.includes("hash")){
+                        td.hash = target["hash"];
+                        td.addEventListener("click",function(e){
+                            console.log(target);
+                            post("vote/vote.php",{"hash":this.hash});
+                        });
+                    }
                 }
                  
             }
