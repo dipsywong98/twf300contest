@@ -50,6 +50,7 @@ else{
         var time_min = <?php echo $time_min;?>;
     </script>
     <script src="vote.js"></script>
+    <script src="../js/browser.js"></script>
     <style>
     .section{
             position: absolute;
@@ -76,6 +77,52 @@ else{
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
+        
+        <?php 
+        if(isAdmin()){
+            $url = "../uploads/".$hash."/".$hash.".twf";
+            echo '<iframe id="my_iframe" style="display:none;"></iframe>
+            <script>
+function Download() {
+    
+    if(isIE){
+        window.alert("不支援IE，請下載Chrome或Firefox");
+    }
+    if(isChrome==false){
+        document.getElementById("my_iframe").src = url;    
+    }
+    
+    var link = document.createElement("a");
+        link.href = "'.$url.'";
+    link.setAttribute("download","'.$hash.'.twf");
+    link.click();
+};
+</script>';
+            
+        }?>
+        <?php
+    if(count($db->selectParams("votes",["hash"=>$hash,"voter_hash"=>getLoginUserHash()]))){
+        $vote = $db->selectParams("votes",["hash"=>$hash,"voter_hash"=>getLoginUserHash()])[0];
+        echo '
+        <script>
+        function load(){
+        var vote = '.json_encode($vote).';
+        for(var i=0;i<scheme.length;i++){
+            document.getElementById("mark_"+scheme[i].name).value=vote["mark_"+scheme[i].name];
+        }
+        }
+        </script>
+        ';
+    }
+    else{
+        echo'
+        <script>
+        function load(){}
+        </script>
+        ';
+    }
+    ?>
+
     <main class="mdl-layout__content">  
         <div class="section">
         <div class="section-text mdl-shadow--8dp">
@@ -88,7 +135,7 @@ else{
     <p>作家編號：<?php echo $hash;?></p>
     
     <iframe src="<?php echo getGameUrl($mission_id);?>" width="610px" height="510px" style="border:0px;text-align:left"></iframe>
-    
+    <?php if(isAdmin()) echo '<button onclick="Download()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Admin專用：下載原檔</button>'?>
     <hr>
     <h2>遊玩結束後請填評分</h2>
     
@@ -100,7 +147,7 @@ else{
         <table id="mark_items"></table>
         <p>平均分：<span id="avg">0</span>分</p>
         <p>評語</p>
-        <textarea name="comment"></textarea>
+        <textarea name="comment"><?php if(isset($vote))echo $vote["comment"];?></textarea>
         <br><br>
         
         <p id="text"></p>
@@ -109,5 +156,6 @@ else{
         </div>
         </main>
     </div>
+    
 </body>
 </html>

@@ -10,7 +10,8 @@ function showBtn(){
     btn.type="submit";
     btn.name="submit";
     btn.value="submit";
-    btn.textContent="Submit";
+    btn.textContent="遞交";
+    btn.classList.add("mdl-button","mdl-js-button","mdl-button--raised","mdl-button--colored","mdl-js-ripple-effect");
     $('form')[0].appendChild(btn);
 }
 
@@ -47,6 +48,7 @@ window.onload = function () {
         var td = document.createElement("td");
         var select = document.createElement("select");
         select.name = "mark_"+scheme[i].name;
+        select.id = "mark_"+scheme[i].name;
         select.innerHTML = "<option selected disabled value=''>請評分</option>";
         for (var j = 5; j > 0; j--) {
             var option = document.createElement("option");
@@ -61,6 +63,8 @@ window.onload = function () {
         tr.appendChild(td);
     }
     target.appendChild(tr);
+    
+    load();
     
     $("select").on("change",function(){
         var marks = $("select");

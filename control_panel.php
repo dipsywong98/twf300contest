@@ -32,7 +32,7 @@ $votes = $db->all("votes");
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
       <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="control_panel.js"></script>
+    <script src="control_panel_.js"></script>
 <style>
 .demo-card-square.mdl-card {
   width: 320px;
