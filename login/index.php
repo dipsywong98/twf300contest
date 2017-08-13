@@ -52,7 +52,7 @@
             <br>
             <input type="hidden" name="from" value="<?php echo $from;?>">
             <input type="hidden" name="third_party_ac" value="<?php if(isset($third_part_ac))echo $third_party_ac;?>">
-            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit" name="submit" value="登入">
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" type="submit" name="submit" value="登入">
         </form></div></div>
     </main></div>
 </body>
