@@ -18,6 +18,8 @@ $users = $db->all("usr");
 
 $votes = $db->all("votes");
 
+$auths = $db->all("third_party_auth");
+
 ?>
 
 <html>
@@ -83,13 +85,19 @@ $votes = $db->all("votes");
         else{
             echo "var votes = [];";
         }
-    
+        if(isset($auths)){
+            $js_array = json_encode($auths);
+            echo "var auths = ". $js_array . ";\n";
+        }
+        else{
+            echo "var auths = [];";
+        }
     ?>
         
         console.log(submits);
         console.log(users);
         console.log(votes);
-        
+        console.log(auths);
         
         
         window.onload =function(){
@@ -114,6 +122,7 @@ $votes = $db->all("votes");
                <a href="#submits-panel" class="mdl-tabs__tab is-active">作品</a>
                <a href="#usr-panel" class="mdl-tabs__tab">用戶</a>
                <a href="#vote-panel" class="mdl-tabs__tab">投票</a>
+                <a href="#auth-panel" class="mdl-tabs__tab">驗証</a>
             </div>
             <div class="mdl-tabs__panel is-active" id="submits-panel">
                 <div class="section">
@@ -133,6 +142,12 @@ $votes = $db->all("votes");
                 <div class="section-text mdl-shadow--8dp" id="d3"></div>
                 </div>
                <script>newTable($("#d3")[0],votes,"votes")</script>
+            </div>
+             <div class="mdl-tabs__panel" id="auth-panel">
+                <div class="section">
+                <div class="section-text mdl-shadow--8dp" id="d4"></div>
+                </div>
+               <script>newTable($("#d4")[0],auths,"auths")</script>
             </div>
          </div>
 	  </main>
