@@ -12,12 +12,12 @@ else{
     }
 }
 
-/*
+
 if($db->numberOf("submits","mission_id","-1")==0){
     alert("no submition need publish now");
     redirect("../");
 }
-
+/*
 //finding a submit to publish
 $submit ="";
 

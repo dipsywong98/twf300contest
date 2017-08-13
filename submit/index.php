@@ -96,7 +96,7 @@
   <label class="mdl-textfield__label" for="schools">留言(不會被公佈，但依然需要遵守匿名等規則)</label>
 </div>
             <br><br>
-<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="submit" value="遞交">
+<input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" type="submit" name="submit" value="遞交">
         </form>
                 </div></div>
     </main>
