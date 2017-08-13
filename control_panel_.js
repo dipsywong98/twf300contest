@@ -159,7 +159,7 @@ function newTable(parent,listArray,type){
                     }
                     sum_mark+=avg_mark/scheme.length;
                 }
-                newTh(tr, "th", "mark_avg",String(sum_mark/filtered.length).substr(0,4));
+                newTh(tr, "td", "mark_avg",String(sum_mark/filtered.length).substr(0,4));
             }
             if(x==3&&type=="votes"){
                 var avg_mark = 0;
@@ -167,13 +167,13 @@ function newTable(parent,listArray,type){
                     var mark = votes[i]["mark_" + scheme[l].name];
                     avg_mark += mark/scheme.length;
                 }
-                newTh(tr, "th", "mark_avg",String(avg_mark).substr(0,4));
+                newTh(tr, "td", "mark_avg",String(avg_mark).substr(0,4));
                 
             }
             if (target.hasOwnProperty(k)) {
                 if(k.includes("comment")){
                     
-                    var btn = newTh(tr,"button","mdl-button mdl-js-button mdl-js-ripple-effect "+k,"view");
+                    var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,"view");
                     newTh(btn, "p", k, contentfilter(k,target[k])).style.display="none";
                     btn.addEventListener("click",function(){
                         dialog = document.querySelector('dialog');
@@ -185,18 +185,18 @@ function newTable(parent,listArray,type){
                           dialog.close();
                         });
                     })
-                    
+                }
+                else if(type=="submits"&&k.includes("hash")){
+                    var td = newTh(tr, "td", k+" mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp",contentfilter(k,target[k]));
+                    td.hash = target["hash"];
+                    td.addEventListener("click",function(e){
+                        post("vote/vote.php",{"hash":this.hash});
+                    });
                 }
                 else{
                     var td = newTh(tr, "td", k, contentfilter(k,target[k]));
                     
-                    if(type=="submits"&&k.includes("hash")){
-                        td.hash = target["hash"];
-                        td.addEventListener("click",function(e){
-                            console.log(target);
-                            post("vote/vote.php",{"hash":this.hash});
-                        });
-                    }
+                    
                 }
                  
             }

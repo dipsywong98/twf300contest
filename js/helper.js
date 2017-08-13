@@ -110,7 +110,7 @@ function newVoteTable(parent, votes, missions) {
     for (var j = 0; j < votes.length; j++) {
         tr = newElement(tbody, "tr", "");
         if (missions != "") {
-            td = newTh(tr, "td", "twf_name", missions[j]["twf_name"]);
+            td = newTh(tr, "td", "twf_name mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp", missions[j]["twf_name"]);
             td.hash = missions[j]["hash"];
             td.addEventListener("click",function(e){
                 post("../vote/vote.php",{"hash":this.hash});
@@ -125,7 +125,7 @@ function newVoteTable(parent, votes, missions) {
             avg_mark += mark;
         }
         avg_td.textContent = avg_mark / scheme.length;
-        var btn = newTh(tr,"button","mdl-button mdl-js-button mdl-js-ripple-effect comment","view");
+        var btn = newTh(tr,"td","comment mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp","view");
         newTh(btn, "p", "comment", votes[j]["comment"]).style.display="none";
         btn.addEventListener("click",function(){
             dialog = document.querySelector('dialog');
