@@ -37,6 +37,10 @@ else{
     redirect("index.php");
 }
 
+if($hash == getLoginUserHash()){
+    alert("請勿自評");
+    redirect("index.php");
+}
 
 ?>
 
