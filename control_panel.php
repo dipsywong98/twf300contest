@@ -26,7 +26,7 @@ $auths = $db->all("third_party_auth");
 <head>
     <title>控制台 - 300容量挑戰賽</title>
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/scheme.js"></script>
+    <script src="js/scheme_.js"></script>
     <script src="js/list.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script src="js/dialog-polyfill.js"></script>

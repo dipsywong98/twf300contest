@@ -27,11 +27,10 @@ $_hash = getLoginUserHash();
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
         <!-- Material Design icon font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <script src="../js/scheme.js"></script>
+        <script src="../js/scheme_.js"></script>
         <script src="../js/list.min.js"></script>
         <script src="../js/sortable.min.js"></script>
         <script src="../js/helper.js"></script>
-        <script src="../js/scheme.js"></script>
         <script src="../js/browser.js"></script>
         <script src="../js/dialog-polyfill.js"></script>
     <link rel="stylesheet" href="../css/dialog-polyfill.css" />
