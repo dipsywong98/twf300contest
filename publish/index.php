@@ -87,7 +87,7 @@
         <br><br> 
         
         <p>違規<br>(打0:沒有違規; 打1:來源問題; 打文字其餘問題)</p>
-        <input id="foul" type="text" name="foul">
+        <input id="foul" type="text" name="foul" value="<?php echo $submit["foul"];?>">
         <br><br>
 <!--
         <p>純文字檔</p>
