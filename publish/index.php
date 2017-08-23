@@ -86,6 +86,9 @@
         <input id="input_pw" type="number" name="mission_id_prove">
         <br><br> 
         
+        <p>違規<br>(打0:沒有違規; 打1:來源問題; 打文字其餘問題)</p>
+        <input id="foul" type="text" name="foul">
+        <br><br>
 <!--
         <p>純文字檔</p>
         <input id="txt" type="file" name="txt_file" accept=".txt">
