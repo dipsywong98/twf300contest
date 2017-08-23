@@ -62,7 +62,7 @@ foreach($submits as $submit){
     
     $hash = $submit["hash"];
     
-    if($submit["mission_id"]==-1){
+    if($submit["mission_id"]==-1 || $submit["mission_id"]==-2){
         continue;
     }
     
