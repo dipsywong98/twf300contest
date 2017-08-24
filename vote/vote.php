@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $twf_name = $submit["twf_name"];
     $mission_id = $submit["mission_id"];
     
-    if($mission_id=="-1"){
+    if($mission_id=="-1"||$mission_id=="-2"){
         redirect("../publish?hash=".$hash);
     }
     

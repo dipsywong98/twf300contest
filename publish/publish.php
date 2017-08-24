@@ -48,10 +48,19 @@ if(isset($_GET["hash"])){
 }
 else{
     if($db->numberOf("submits","mission_id","-1")==0){
-        alert("no submition need publish now");
-        redirect("../");
+        if($db->numberOf("submits","mission_id","-2")==0){
+            alert("no submition need publish now");
+            redirect("../");
+        }
+        else{
+            $submit = $db->select("submits","mission_id","-2");
+        }
+        
     }
-    $submit = $db->select("submits","mission_id","-1");
+    else{
+        $submit = $db->select("submits","mission_id","-1");
+    }
+    
 }
 
 $twf_name = $submit["twf_name"];
