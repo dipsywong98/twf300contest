@@ -214,16 +214,42 @@ foreach ($marks as $key => $value) {
         .mdl-grid.center-items {
           justify-content: center;
         }
-    
+    .section{
+  position: absolute;
+        top:11%;
+  width: 100%;
+  text-align: center;
+        }
+        .section-text{
+            display: inline-block;
+            max-width: 800px;
+              margin-left: 25%;
+            margin-right: 25%;
+              padding-left: 24px;
+            padding-bottom: 24px;
+            padding-right: 24px;
+              text-align: left;
+        }
     </style>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "../nav_bar.php";?>
         <main>
-    <div class="mdl-grid center-items" id="selects">
+            <div class="section">
+            
+                <div class="mdl-grid center-items" id="selects">
     
-    </div>
+    </div><div class="section-text mdl-shadow--8dp">
+                <h2>評分說明</h2>
+                <p>本頁會在資料庫找出3個作品供評賞人遊玩。抽取規則：</p>
+                <li>非玩家所遞交的作品</li>
+                <li>玩家尚未遊玩過的作品</li>
+                <li>優先選擇較少人玩過的作品</li>
+                <li>優先選擇玩家ip未玩過的作品</li>
+                </div>
+            </div>
+    
     <form method="post" enctype="multipart/form-data" action='vote.php'>
         <input type="hidden" value="" name="hash">
         <input type="submit" value="submit" name="submit" style="visibility: hidden;">

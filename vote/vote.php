@@ -142,7 +142,7 @@ function Download() {
     <?php if(isAdmin()) echo '<button onclick="Download()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Admin專用：下載原檔</button>'?>
     <hr>
     <h2>遊玩結束後請填評分</h2>
-    
+    <a href="https://lh3.google.com/u/0/d/0B2wxG8U_9xycTU1zUDdIS2VSaFE=w1360-h638-iv1" target="_blank"><img src="https://drive.google.com/uc?export=download&id=0B2wxG8U_9xycTU1zUDdIS2VSaFE" style="width:600px"></a>
     <form method="post" enctype="multipart/form-data" action='index.php'>
         <p id="desciptor"></p>
         
