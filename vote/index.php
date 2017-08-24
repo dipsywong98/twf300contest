@@ -27,11 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "voter_hash"=>$voter_hash,
         "voter_ip"=>$ip,
         "mark_experience"=>$_POST["mark_experience"],
-        "mark_balance"=>$_POST["mark_balance"],
         "mark_art"=>$_POST["mark_art"],
         "mark_content"=>$_POST["mark_content"],
         "mark_tech"=>$_POST["mark_tech"],
-        "mark_story"=>$_POST["mark_story"],
         "mark_creative"=>$_POST["mark_creative"],
         "comment"=>$_POST["comment"],
         "admin"=>isAdmin()
