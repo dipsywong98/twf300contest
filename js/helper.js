@@ -122,7 +122,7 @@ function newVoteTable(parent, votes, missions) {
         for (var i = 0; i < scheme.length; i++) {
             var mark = votes[j]["mark_" + scheme[i].name];
             newTh(tr, "td", "mark_" + scheme[i].name, mark);
-            avg_mark += mark;
+            avg_mark += Number(mark);
         }
         avg_td.textContent = avg_mark / scheme.length;
         var btn = newTh(tr,"td","comment mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp","view");
