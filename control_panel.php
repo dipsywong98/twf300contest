@@ -78,7 +78,7 @@ $auths = $db->all("third_party_auth");
         else{
             echo "var users = [];";
         }
-        if(isset($votes)&&time()>1504799999){
+        if(isset($votes)){
             $js_array = json_encode($votes);
             echo "var votes = ". $js_array . ";\n";
         }
