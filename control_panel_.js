@@ -155,7 +155,7 @@ function newTable(parent,listArray,type){
                     var avg_mark = 0;
                     for (var l = 0; l < scheme.length; l++) {
                         var mark = votes[j]["mark_" + scheme[l].name];
-                        avg_mark += mark;
+                        avg_mark += Number(mark);
                     }
                     sum_mark+=avg_mark/scheme.length;
                 }
