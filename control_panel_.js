@@ -35,7 +35,7 @@ function keyfilter(key){
         var t =  scheme.filter(function(s){
             return s.name==key.substr(5);
         });
-        console.log(t);
+//        console.log(t);
         return t[0].text;
         }
     return key;
@@ -53,7 +53,7 @@ function contentfilter(key,value){
 }
 
 function format(timestamp) {
-    console.log(timestamp);
+//    console.log(timestamp);
     var date = new Date(timestamp * 1000);
     var month = date.getMonth() + 1;
     var dat = date.getDate();
@@ -73,7 +73,7 @@ function newElement(parent, element, class_list) {
     }
 
     parent.appendChild(_x);
-    console.log(parent, _x);
+//    console.log(parent, _x);
     return _x;
 }
 
@@ -150,11 +150,12 @@ function newTable(parent,listArray,type){
                 var filtered = votes.filter(function(vote) { 
                     return vote.hash == target.hash; 
                 });
+//                console.log(filtered);
                 var sum_mark=0;
                 for (var j=0;j<filtered.length;j++){
                     var avg_mark = 0;
                     for (var l = 0; l < scheme.length; l++) {
-                        var mark = votes[j]["mark_" + scheme[l].name];
+                        var mark = filtered[j]["mark_" + scheme[l].name];
                         avg_mark += Number(mark);
                     }
                     sum_mark+=avg_mark/scheme.length;
@@ -206,7 +207,7 @@ function newTable(parent,listArray,type){
                             cache: false,
                             success: function(result){
 //                                alert(result);
-                                console.log(result);
+//                                console.log(result);
                                 if(result!=-1){
 //                                    hihi = this;
                                     td.innerText = result;
