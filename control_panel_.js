@@ -193,6 +193,32 @@ function newTable(parent,listArray,type){
                         post("vote/vote.php",{"hash":this.hash});
                     });
                 }
+                else if(type=="votes"&&k.includes("is_valid")){
+                    var td = newTh(tr, "td", k+" mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp",contentfilter(k,target[k]));
+                    td.hash = target["hash"];
+                    td.voter_hash = target["voter_hash"];
+                    td.addEventListener("click",function(e){
+                        var td = this;
+                        $.ajax({
+                            url:'set_vote_valid.php',
+                            type:'post',
+                            data:'hash='+this.hash+'&voter_hash='+this.voter_hash,
+                            cache: false,
+                            success: function(result){
+//                                alert(result);
+                                console.log(result);
+                                if(result!=-1){
+//                                    hihi = this;
+                                    td.innerText = result;
+                                }
+                                else{
+                                    alert('fail to set');
+                                }
+                            }
+                        })
+//                        post("set_vote_valid.php",{"hash":this.hash,"voter_hash":this.voter_hash});
+                    });
+                }
                 else{
                     var td = newTh(tr, "td", k, contentfilter(k,target[k]));
                     
