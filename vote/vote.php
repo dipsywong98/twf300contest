@@ -93,7 +93,7 @@ function Download() {
         window.alert("不支援IE，請下載Chrome或Firefox");
     }
     if(isChrome==false){
-        document.getElementById("my_iframe").src = url;    
+        document.getElementById("my_iframe").src = "'.$url.'";    
     }
     
     var link = document.createElement("a");
@@ -137,8 +137,10 @@ function Download() {
     
     <p>作品名稱：<?php echo $twf_name;?></p>
     <p>作家編號：<?php echo $hash;?></p>
+    <p>任務代碼：<?php echo $mission_id;?></p>
     
     <iframe src="<?php echo getGameUrl($mission_id);?>" width="610px" height="510px" style="border:0px;text-align:left"></iframe>
+            <a href="<?php echo getGameUrl($mission_id);?>" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">如果無法載入，點我前往遊玩</a>
     <?php if(isAdmin()) echo '<button onclick="Download()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Admin專用：下載原檔</button>'?>
     <hr>
     <h2>遊玩結束後請填評分</h2>
