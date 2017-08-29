@@ -86,20 +86,18 @@ if($hash == getLoginUserHash()){
         if(isAdmin()){
             $url = "../uploads/".$hash."/".$hash.".twf";
             echo '<iframe id="my_iframe" style="display:none;"></iframe>
+            <a href="'.$url.'" id="download" download="xd.twf"></a>
             <script>
 function Download() {
     
-    if(isIE){
-        window.alert("不支援IE，請下載Chrome或Firefox");
-    }
-    if(isChrome==false){
-        document.getElementById("my_iframe").src = "'.$url.'";    
-    }
+//    if(isIE){
+//        window.alert("不支援IE，請下載Chrome或Firefox");
+//    }
+//    if(isChrome==false){
+//        document.getElementById("my_iframe").src = "'.$url.'";    
+//    }
     
-    var link = document.createElement("a");
-        link.href = "'.$url.'";
-    link.setAttribute("download","'.$hash.'.twf");
-    link.click();
+    $("#download").click();
 };
 </script>';
             
@@ -141,7 +139,7 @@ function Download() {
     
     <iframe src="<?php echo getGameUrl($mission_id);?>" width="610px" height="510px" style="border:0px;text-align:left"></iframe>
             <a href="<?php echo getGameUrl($mission_id);?>" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">如果無法載入，點我前往遊玩</a>
-    <?php if(isAdmin()) echo '<button onclick="Download()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Admin專用：下載原檔</button>'?>
+    <?php if(isAdmin()) echo '<a href="'.$url.'" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" download="'.$twf_name.'.twf">Admin專用：下載原檔</a>'?>
     <hr>
     <h2>遊玩結束後請填評分</h2>
     <a href="https://lh3.google.com/u/0/d/0B2wxG8U_9xycTU1zUDdIS2VSaFE=w1360-h638-iv1" target="_blank"><img src="https://drive.google.com/uc?export=download&id=0B2wxG8U_9xycTU1zUDdIS2VSaFE" style="width:600px"></a>

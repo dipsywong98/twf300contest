@@ -68,8 +68,8 @@
         echo " 香港時間".$dt->format('Y年m月d日 H:i:s (A)');
         ?>之前公開，否則會有下一名評審代為公開</p>
 -->
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="download('<?php echo"../uploads/".$hash."/".$hash.".twf";?>')">下載twf檔</button>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="download('<?php echo"../uploads/".$hash."/".$hash.".".$photo_type;?>')">下載圖片檔</button>
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="<?php echo"../uploads/".$hash."/".$hash.".twf";?>" download="<?php echo $twf_name;?>.twf">下載twf檔</a>
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="<?php echo"../uploads/".$hash."/".$hash.".".$photo_type;?>" download="<?php echo $twf_name.'.'.$photo_type;?>">下載圖片檔</a>
     
     <hr>
     <h2>公開後請填寫此表</h2>

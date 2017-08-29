@@ -131,6 +131,20 @@ class DB{
     
 }
 
+function removeNumberKey($ary){
+    $new = [];
+    $i=0;
+    foreach($ary as $row){
+        foreach($row as $key=>$value){
+            if(!is_numeric($key)){
+                $new[$i][$key] = $value;
+            }
+        }
+        $i++;
+    }
+    return $new;
+}
+
 $db = new DB($conn);
 
 ?>
