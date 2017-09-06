@@ -10,7 +10,7 @@ if(time()<1503504000){
     alert("投票尚未開始");
     redirect("../index.php");
 }
-if(time()>1504799999){
+if(time()>1504799999&&!isAdmin()){
     alert("投票已經結束");
     redirect("../index.php");
 }
