@@ -89,7 +89,7 @@ class DB{
             $data[$key] = $value;
         }
 //        echo $sql;
-        print_r($data);
+//        print_r($data);
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($data);
     }
