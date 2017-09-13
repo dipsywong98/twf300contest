@@ -25,6 +25,9 @@ foreach($submits as $key=>&$submit){
         if(str_contain($k,"hash")||str_contain($k,"#")||str_contain($k,"m_")){
             $_submit[$k] = $v;
         }
+        else if(str_contain($k,"foul")){
+            $_submit[$k] = $v;
+        }
     }
     array_push($output,$_submit);
 }
