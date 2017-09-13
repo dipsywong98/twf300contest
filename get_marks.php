@@ -61,6 +61,7 @@ function BuildSubmit($submit){
     
     foreach($public_marks as $key=>$_){
         $submit["m_all_".$key]=($public_marks[$key]+$admin_marks[$key])/2;
+        $submit["m_sum_".$key]=($public_marks[$key]*$submit["#public_vote"]+$admin_marks[$key]*$submit["#admin_vote"])/$submit["#all_vote"];
         $submit["m_public_".$key]=$public_marks[$key];
         $submit["m_admin_".$key]=$admin_marks[$key];
     }
