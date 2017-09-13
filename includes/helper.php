@@ -94,7 +94,7 @@ session_start();
     }
 
     function isAdmin(){
-        $admin=["twf300_2017","a230459446","ericgau22","100002331046844@facebook.com","100003919138920@facebook.com","100000913023977@facebook.com","100001619080761@facebook.com","money8888"];
+        $admin=["twf300_2017","a230459446","ericgau22","100002331046844@facebook.com","100003919138920@facebook.com","100000913023977@facebook.com","100001619080761@facebook.com","money8888","facebookoffical"];
         return in_array(getLoginUsername(),$admin);
     }
 

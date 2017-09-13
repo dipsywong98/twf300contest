@@ -22,10 +22,7 @@ foreach($submits as $key=>&$submit){
      $submit = BuildSubmit($submit);
     $_submit = [];
     foreach($submit as $k=>$v){
-        if(str_contain($k,"hash")||str_contain($k,"#")||str_contain($k,"m_")){
-            $_submit[$k] = $v;
-        }
-        else if(str_contain($k,"foul")){
+        if(str_contain("hash foul twf_name",$k)||str_contain($k,"#")||str_contain($k,"m_")){
             $_submit[$k] = $v;
         }
     }

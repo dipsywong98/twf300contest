@@ -67,8 +67,9 @@ function contentfilter(key,value){
     }
     if(key.includes("time")&&!key.includes("min")){
         if(value<1000) return "N/A";
-       return format(value);
-       }
+        return format(value);
+    }
+    if(key.includes("m_")&&value!="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
     return value;
 }
 
