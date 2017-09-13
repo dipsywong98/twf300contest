@@ -98,7 +98,12 @@ function CalMark($votes){
         $mark_ctv += $ctv;
         $count++;
     }
-    
+    if($count==0) return [
+        "general"=>"N/A",
+        "entertain"=>"N/A",
+        "tech"=>"N/A",
+        "creative"=>"N/A"
+    ];
     return [
         "general"=>$mark_gen/$count,
         "entertain"=>$mark_ent/$count,
