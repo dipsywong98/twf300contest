@@ -122,6 +122,7 @@ $auths = $db->all("third_party_auth");
                <a href="#usr-panel" class="mdl-tabs__tab">用戶</a>
                <a href="#vote-panel" class="mdl-tabs__tab">投票</a>
                 <a href="#auth-panel" class="mdl-tabs__tab">驗証</a>
+                <a href="#mark-panel" class="mdl-tabs__tab">分數</a>
             </div>
             <div class="mdl-tabs__panel is-active" id="submits-panel">
                 <div class="section">
@@ -147,6 +148,18 @@ $auths = $db->all("third_party_auth");
                 <div class="section-text mdl-shadow--8dp" id="d4"></div>
                 </div>
                <script>newTable($("#d4")[0],auths,"auths")</script>
+            </div>
+             <div class="mdl-tabs__panel" id="mark-panel">
+                <div class="section">
+                <div class="section-text mdl-shadow--8dp" id="d5"></div>
+                </div>
+               <script>
+                   $.ajax({url: "get_marks.php", success: function(result){
+                       console.log(result);
+                       var marks = JSON.parse(result);
+                        newTable($("#d5")[0],marks,"marks")
+                    }});
+                   </script>
             </div>
          </div>
 	  </main>

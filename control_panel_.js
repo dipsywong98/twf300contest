@@ -6,6 +6,25 @@
 //    ""
 
 //]
+
+var key_dict={
+    "#all_vote":"總票數",
+    "#public_vote":"公眾票數",
+    "#admin_vote":"評審票數",
+    "m_all_general":"總平均",
+    "m_public_general":"大眾平均",
+    "m_admin_general":"評審平均",
+    "m_all_entertain":"總娛樂",
+    "m_public_entertain":"大眾娛樂",
+    "m_admin_entertain":"評審娛樂",
+    "m_all_tech":"總技術",
+    "m_public_tech":"大眾技術",
+    "m_admin_tech":"評審技術",
+    "m_all_creative":"總創意",
+    "m_public_creative":"大眾創意",
+    "m_admin_creative":"評審創意"
+}
+
 function post(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
 
@@ -38,6 +57,7 @@ function keyfilter(key){
 //        console.log(t);
         return t[0].text;
         }
+    if(key in key_dict) return key_dict[key];
     return key;
 }
 
@@ -187,7 +207,7 @@ function newTable(parent,listArray,type){
                         });
                     })
                 }
-                else if(type=="submits"&&k.includes("hash")){
+                else if((type=="submits"||type=="marks")&&k.includes("hash")){
                     var td = newTh(tr, "td", k+" mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp",contentfilter(k,target[k]));
                     td.hash = target["hash"];
                     td.addEventListener("click",function(e){
