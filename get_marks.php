@@ -19,6 +19,7 @@ $output = [];
 
 $submits = $db->all("submits");
 foreach($submits as $key=>&$submit){
+    if($submit["foul"]!=0)continue;
      $submit = BuildSubmit($submit);
     $_submit = [];
     foreach($submit as $k=>$v){
