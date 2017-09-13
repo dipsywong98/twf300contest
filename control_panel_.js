@@ -69,8 +69,8 @@ function contentfilter(key,value){
         if(value<1000) return "N/A";
         return format(value);
     }
-    if(key.includes("m_")&&value!="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
-    return value;
+    if(key.includes("m_")&&value!=="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
+    return String(value).substr(0,10);
 }
 
 function format(timestamp) {
