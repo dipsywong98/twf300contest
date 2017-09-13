@@ -17,7 +17,7 @@ if(time()>1504799999&&!isAdmin()){
 
 $ip = get_client_ip();
 $voter_hash = getLoginUserHash();
-$submits = $conn->query("SELECT * FROM submits");
+$submits = $conn->query("SELECT * FROM submits WHERE foul = 0");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(count($db->selectParams("votes",["hash"=>$_POST["hash"],"voter_hash"=>$voter_hash]))==0){

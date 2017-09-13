@@ -70,7 +70,9 @@ function contentfilter(key,value){
         return format(value);
     }
     if(key.includes("m_")&&value!=="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
-    return String(value).substr(0,10);
+    if(key.includes("foul")) return String(value).substr(0,1);
+    if(!key.includes("comment")) return String(value).substr(0,10);
+    return value;
 }
 
 function format(timestamp) {
