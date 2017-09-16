@@ -24,7 +24,8 @@ var key_dict={
     "twf_name":"任務名稱",
     "mission_id":"任務代碼",
     "username":"作者id",
-    "vote":"所有評分"
+    "vote":"所有評分",
+    "foul":"違規"
 }
 
 function post(path, params, method) {
@@ -72,8 +73,8 @@ function contentfilter(key,value){
         return format(value);
     }
     if(key.includes("m_")&&value!=="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
-    if(key.includes("foul")) return String(value).substr(0,1);
-    if(!key.includes("comment")&&!key.includes("username")&&!key.includes("ac")) return String(value).substr(0,10);
+    if(key.includes("foul")) return (String(value)==="0"?"否":"是");
+//    if(!key.includes("comment")&&!key.includes("username")&&!key.includes("ac")) return String(value).substr(0,10);
     return value;
 }
 
