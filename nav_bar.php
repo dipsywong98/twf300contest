@@ -10,6 +10,7 @@ function print_nav_list(){
     else{
         if(isThirdAuth()){
             echo '
+    <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'result.php">賽果</a>
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'vote">評分</a>
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'submit">投稿</a>
     <a class="mdl-navigation__link mdl-js-ripple-effect" href="'.getRoot().'profile">個人檔案</a>';

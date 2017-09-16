@@ -39,7 +39,7 @@ foreach($submits as $key=>&$submit){
             }
         }
         else{
-            if((str_contain("hash twf_name mission_id",$k)||str_contain($k,"#all")||str_contain($k,"m_all"))&&!str_contain($k,"entertain")){
+            if((str_contain("hash twf_name mission_id username",$k)||str_contain($k,"#all")||str_contain($k,"m_all"))&&!str_contain($k,"entertain")){
                 $_submit[$k] = $v;
             }
         }
@@ -70,6 +70,11 @@ function BuildSubmit($submit){
     $public_votes = $db->selectParams("votes",["hash"=>$hash,"admin"=>0,"is_valid"=>1]);
     $admin_votes = $db->SelectParams("votes",["hash"=>$hash,"admin"=>1,"is_valid"=>1]);
     
+    if($GLOBALS["type"]=="general"){
+        $user = $db->selectParams("usr",["hash"=>$hash])[0];
+        $submit["username"] = $user["username"];
+    }
+    
     $submit["#all_vote"]=count($db->SelectParams("votes",["hash"=>$hash,"is_valid"=>1]));
     $submit["#public_vote"]=count($public_votes);
     $submit["#admin_vote"]=count($admin_votes);
@@ -82,7 +87,6 @@ function BuildSubmit($submit){
         $submit["m_public_".$key]=$public_marks[$key];
         $submit["m_admin_".$key]=$admin_marks[$key];
     }
-    
 //    echo "<hr>";
 //    PrintArray($submit);
 //    echo "<hr>";
