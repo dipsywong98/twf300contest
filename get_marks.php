@@ -95,7 +95,7 @@ function CalMark($votes){
         $tch = $vote["mark_tech"];
         $ctv = $vote["mark_creative"];
         $mark_gen += $exp+$art+$cnt+$tch+$ctv;
-        $mark_ent += ($exp*4+$art+$cnt*3+$ctv*2)/10;
+        $mark_ent += ($exp*4+$art*1.5+$cnt*3+$ctv*1.5)/10;
         $mark_tch += $tch;
         $mark_ctv += $ctv;
         $count++;
