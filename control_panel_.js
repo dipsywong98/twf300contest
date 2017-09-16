@@ -75,7 +75,7 @@ function contentfilter(key,value){
     }
     if(key.includes("m_")&&value!=="N/A") {console.log("hi");return Math.round(Number(value) * 100) / 100};
     if(key.includes("foul")) return String(value).substr(0,1);
-    if(!key.includes("comment")) return String(value).substr(0,10);
+    if(!key.includes("comment")&&!key.includes("username")&&!key.includes("ac")) return String(value).substr(0,10);
     return value;
 }
 
