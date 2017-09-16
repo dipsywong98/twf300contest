@@ -1,3 +1,4 @@
+<?php require "includes/helper.php";?>
 <html>
 <head>
     <title>賽果 - 300容量挑戰賽</title>
