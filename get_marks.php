@@ -29,7 +29,7 @@ $output = [];
 
 $submits = $db->all("submits");
 foreach($submits as $key=>&$submit){
-    if($type=="admin"&&$submit["foul"]!=0)continue;
+//    if($type=="admin"&&$submit["foul"]!=0)continue;
      $submit = BuildSubmit($submit);
     $_submit = [];
     foreach($submit as $k=>$v){
@@ -39,7 +39,7 @@ foreach($submits as $key=>&$submit){
             }
         }
         else{
-            if((str_contain("hash twf_name mission_id username",$k)||str_contain($k,"#all")||str_contain($k,"m_all"))&&!str_contain($k,"entertain")){
+            if((str_contain("hash foul twf_name mission_id username",$k)||str_contain($k,"#all")||str_contain($k,"m_all"))&&!str_contain($k,"entertain")){
                 $_submit[$k] = $v;
             }
         }
@@ -83,7 +83,7 @@ function BuildSubmit($submit){
     
     foreach($public_marks as $key=>$_){
         $submit["m_all_".$key]=($public_marks[$key]+$admin_marks[$key])/2;
-        $submit["m_sum_".$key]=($public_marks[$key]*$submit["#public_vote"]+$admin_marks[$key]*$submit["#admin_vote"])/$submit["#all_vote"];
+        if($GLOBALS["type"]=="admin") $submit["m_sum_".$key]=($public_marks[$key]*$submit["#public_vote"]+$admin_marks[$key]*$submit["#admin_vote"])/$submit["#all_vote"];
         $submit["m_public_".$key]=$public_marks[$key];
         $submit["m_admin_".$key]=$admin_marks[$key];
     }
