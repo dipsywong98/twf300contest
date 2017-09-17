@@ -45,7 +45,7 @@
         <?php require "nav_bar.php";?>
         
       <main class="mdl-layout__content">    
-          <dialog class="mdl-dialog">
+          <dialog class="mdl-dialog" style="width:400px;">
               <p id="dialog-content" style="word-wrap:break-word;"></p>
       <button type="button" class="mdl-button close">關閉</button>
   </dialog>
