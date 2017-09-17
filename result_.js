@@ -206,7 +206,9 @@ function newTable(parent,listArray,type){
                     var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,text);
                     newTh(btn, "p", k, contentfilter(k,target[k])).style.display="none";
                     btn.addEventListener("click",function(){
-                        window.alert("評語內容\n"+this.childNodes[1].innerHTML);
+                        var text = this.childNodes[1].innerHTML;
+                        if(text=="")text="(空)";
+                        window.alert("評語內容：\n"+text);
                     })
                 }
                 else if(type=="marks"&&k.includes("twf_name")){
