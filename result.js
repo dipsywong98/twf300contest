@@ -223,11 +223,17 @@ function newTable(parent,listArray,type){
                     });
                 }
                 else if(type=="marks"&&k.includes("username")){
-                    var url = "http://tw.gamelet.com/user.do?username="+target[k];
+                    var url = +target[k];
                     var td = newTh(tr, "td", k+" mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp",contentfilter(k,target[k]));
-                    td.href=url;
+//                    td.href=url;
                     td.addEventListener("click",function(e){
-                        post(this.url);
+                        var url="http://tw.gamelet.com/user.do?username="+this.innerHTML;
+//                        console.log(this);
+                        console.log(url);
+//                        post(this.url);
+                        var a = document.createElement("a");
+                        a.href=url;
+                        a.click();
                     });
                 }
                 else if(type=="marks"&&k.includes("votes")){
