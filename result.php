@@ -52,6 +52,7 @@
           <div class="section">
             <div class="section-text mdl-shadow--8dp">
                 <h2>賽果</h2>
+                <img src="result.png" width="70%">
          <div id="d">
              <form action="#">
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

@@ -22,7 +22,7 @@ require "includes/helper.php";
 .demo-card-square.mdl-card {
   width: 320px;
   height: 320px;
-    margin:10px;
+    margin:0px;
 }
 .demo-card-square > .mdl-card__title {
   color: #fff;
@@ -83,10 +83,15 @@ require "includes/helper.php";
 <div>娛樂獎：娛樂性最高者，100點</div>
 <div>技術獎：技術性最高者，100點</div>
 <div>創意獎：最別樹一格者，100點</div>
-                
-                    </div>
+                <hr>
+                <h2>比賽結果</h2>
+            <img src="result.png" width="70%">
+                    <h6>恭喜以上得獎者，希望各位參賽者得在比賽中有所得著。所有評分可以在下面連結中找到</h6>
+                    <a href="result.php" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">所有賽果</a>
+                    
+                        </div>
 
-        <div class="carousel">
+        <div class="carousel" style="padding:10px">
             
     <div class="carousel-item">
     <div class="demo-card-square mdl-card mdl-shadow--2dp">
@@ -187,7 +192,6 @@ require "includes/helper.php";
   </div>
   </div>  
  </div>
-            
 </div>
                
                 <!-- Forth Section -->
