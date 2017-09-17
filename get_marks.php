@@ -71,8 +71,11 @@ function BuildSubmit($submit){
     $admin_votes = $db->SelectParams("votes",["hash"=>$hash,"admin"=>1,"is_valid"=>1]);
     
     if($GLOBALS["type"]=="general"){
+        $f = $submit["foul"];
+        unset($submit["foul"]);
         $user = $db->selectParams("usr",["hash"=>$hash])[0];
         $submit["username"] = $user["username"];
+        $submit["foul"]=$f;
     }
     
     $submit["#all_vote"]=count($db->SelectParams("votes",["hash"=>$hash,"is_valid"=>1]));

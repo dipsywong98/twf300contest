@@ -201,18 +201,12 @@ function newTable(parent,listArray,type){
 //            }
             if (target.hasOwnProperty(k)) {
                 if(k.includes("comment")){
-                    
-                    var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,"view");
+                    var text = "view";
+                    if(target["comment"]=="")text="(空)";
+                    var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,text);
                     newTh(btn, "p", k, contentfilter(k,target[k])).style.display="none";
                     btn.addEventListener("click",function(){
-                        dialog = document.querySelector('dialog');
-                        if (! dialog.showModal) {
-                          dialogPolyfill.registerDialog(dialog);
-                        }
-                        dialog.showModal();
-                       $("#dialog-content")[0].innerHTML=this.childNodes[1].innerHTML; dialog.querySelector('.close').addEventListener('click', function() {
-                          dialog.close();
-                        });
+                        window.alert("評語內容\n"+this.childNodes[1].innerHTML);
                     })
                 }
                 else if(type=="marks"&&k.includes("twf_name")){
@@ -236,8 +230,8 @@ function newTable(parent,listArray,type){
                         a.click();
                     });
                 }
-                else if(type=="marks"&&k.includes("votes")){
-                    LoadVotes(tr,target[k]);
+                else if(type=="marks"&&k.includes("#all_vote")){
+                    LoadVotes(tr,k,target);
                 }
                 else{
                     var td = newTh(tr, "td", k, contentfilter(k,target[k]));
@@ -262,10 +256,9 @@ function newTable(parent,listArray,type){
     return table;
 }
 
-function LoadVotes(tr,votes){
-    var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,"view");
-    newTh(btn, "p", k, "All Votes").style.display="none";
-    btn.votes = votes;
+function LoadVotes(tr,k,submit){
+    var btn = newTh(tr,"td","mdl-button mdl-js-button mdl-js-ripple-effect mdl-shadow--2dp "+k,submit[k]);
+    btn.hash = submit["hash"];
     btn.addEventListener("click",function(){
         dialog = document.querySelector('dialog');
         if (! dialog.showModal) {
@@ -277,7 +270,16 @@ function LoadVotes(tr,votes){
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
-       newTable(myNode,this.votes,"votes");
+        
+        $.ajax({url: "get_votes.php?hash="+this.hash, success: function(result){
+                       console.log(result);
+                       var votes = JSON.parse(result);
+                        newTable($("#dialog-content")[0],votes,"votes")
+                    }});
+       
+//        newTh(myNode,"p","",this.hash);
+//        newTable(myNode,this.votes,"votes");
+        
         dialog.querySelector('.close').addEventListener('click', function() {
           dialog.close();
         });
