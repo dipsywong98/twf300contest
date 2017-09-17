@@ -51,6 +51,7 @@
   </dialog>
           <div class="section">
             <div class="section-text mdl-shadow--8dp">
+                <h2>賽果</h2>
          <div id="d">
           <script>$.ajax({url: "get_marks.php?type=general", success: function(result){
                        console.log(result);
