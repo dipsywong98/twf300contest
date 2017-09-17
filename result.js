@@ -132,13 +132,13 @@ function newTh(parent, element, class_list, text) {
 
 function newTable(parent,listArray,type){
      //search bar
-    var form = newElement(parent,"form","");
-    form.setAttribute("action","#");
-    var div = newElement(form,"div","mdl-textfield mdl-js-textfield mdl-textfield--floating-label");
-    var input = newElement(div,"input","mdl-textfield__input search");
-    input.type="text";
-    input.id="search"
-    newTh(div,"label","mdl-textfield__label","搜尋").setAttribute("for","search");
+//    var form = newElement(parent,"form","");
+//    form.setAttribute("action","#");
+//    var div = newElement(form,"div","mdl-textfield mdl-js-textfield mdl-textfield--floating-label");
+//    var input = newElement(div,"input","mdl-textfield__input search");
+//    input.type="text";
+//    input.id="search"
+//    newTh(div,"label","mdl-textfield__label","搜尋").setAttribute("for","search");
     
     var tag=[];
     
@@ -250,6 +250,8 @@ function newTable(parent,listArray,type){
     
     var options = {valueNames: tag},
         documentTable = new List(parent, options);
+    
+    $("[data-sort='m_all_general']")[0].classList.add("desc");
     
     return table;
 }

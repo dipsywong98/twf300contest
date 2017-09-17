@@ -53,6 +53,12 @@
             <div class="section-text mdl-shadow--8dp">
                 <h2>賽果</h2>
          <div id="d">
+             <form action="#">
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                 <input class="mdl-textfield__input search" type="text" id="search">
+                 <label class="mdl-textfield__label" for="search">搜尋</label>
+                 </div>
+             </form>
           <script>$.ajax({url: "get_marks.php?type=general", success: function(result){
                        console.log(result);
                        var marks = JSON.parse(result);
