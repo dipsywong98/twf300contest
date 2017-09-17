@@ -253,7 +253,7 @@ function newTable(parent,listArray,type){
     var options = {valueNames: tag},
         documentTable = new List(parent, options);
     
-    $("[data-sort='m_all_general']")[0].classList.add("desc");
+    $("[data-sort='m_all_general']")[0]
     
     return table;
 }
