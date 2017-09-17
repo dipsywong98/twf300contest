@@ -272,7 +272,7 @@ function LoadVotes(tr,k,submit){
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
-        
+        newTh($("#dialog-content")[0],"h2","",submit["twf_name"]);
         $.ajax({url: "get_votes.php?hash="+this.hash, success: function(result){
                        console.log(result);
                        var votes = JSON.parse(result);
