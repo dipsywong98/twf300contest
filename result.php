@@ -44,16 +44,16 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "nav_bar.php";?>
         
-      <main class="mdl-layout__content" >    
+      <main class="mdl-layout__content" style="overflow-x: scroll;">    
           <dialog class="mdl-dialog" style="width:400px;">
               <p id="dialog-content" style="word-wrap:break-word;"></p>
       <button type="button" class="mdl-button close">關閉</button>
   </dialog>
           <div class="section">
-            <div class="section-text mdl-shadow--8dp">
+            <div class="section-text mdl-shadow--8dp"  >
                 <h2>賽果</h2>
                 <img src="result.png" width="70%">
-         <div id="d"  style="overflow-x: scroll;">
+         <div id="d">
              <form action="#">
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                  <input class="mdl-textfield__input search" type="text" id="search">
