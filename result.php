@@ -40,7 +40,7 @@
         }
 </style>
 </head>
-    <body  style="overflow-x: scroll;">
+    <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "nav_bar.php";?>
         
@@ -53,7 +53,7 @@
             <div class="section-text mdl-shadow--8dp">
                 <h2>賽果</h2>
                 <img src="result.png" width="70%">
-         <div id="d">
+         <div id="d"  style="overflow-x: scroll;">
              <form action="#">
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                  <input class="mdl-textfield__input search" type="text" id="search">
