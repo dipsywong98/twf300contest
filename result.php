@@ -40,11 +40,11 @@
         }
 </style>
 </head>
-    <body>
+    <body  style="overflow-x: scroll;">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <?php require "nav_bar.php";?>
         
-      <main class="mdl-layout__content">    
+      <main class="mdl-layout__content" >    
           <dialog class="mdl-dialog" style="width:400px;">
               <p id="dialog-content" style="word-wrap:break-word;"></p>
       <button type="button" class="mdl-button close">關閉</button>
